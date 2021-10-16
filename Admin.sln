@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Admin", "Core.Admin\Core.Admin.csproj", "{70A31220-5842-49C7-89A1-7FA8B7D32D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Services", "Core.Services\Core.Services.csproj", "{8D3D3AEF-180F-4793-92E2-624B64F99652}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.ViewModels", "Core.ViewModels\Core.ViewModels.csproj", "{2521AE29-9DED-4C09-A6DF-B89BD7082C04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AccessLayer", "Core.AccessLayer\Core.AccessLayer.csproj", "{A259080B-D5E7-4171-BEAA-73D8C448D44D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B80BBAF4-447D-4D2F-94AB-C8B1AF79FFE8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{8ECD8CEC-49E0-4015-934A-036CBD04673D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70A31220-5842-49C7-89A1-7FA8B7D32D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A31220-5842-49C7-89A1-7FA8B7D32D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A31220-5842-49C7-89A1-7FA8B7D32D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A31220-5842-49C7-89A1-7FA8B7D32D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D3D3AEF-180F-4793-92E2-624B64F99652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D3D3AEF-180F-4793-92E2-624B64F99652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D3D3AEF-180F-4793-92E2-624B64F99652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D3D3AEF-180F-4793-92E2-624B64F99652}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2521AE29-9DED-4C09-A6DF-B89BD7082C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2521AE29-9DED-4C09-A6DF-B89BD7082C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2521AE29-9DED-4C09-A6DF-B89BD7082C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2521AE29-9DED-4C09-A6DF-B89BD7082C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A259080B-D5E7-4171-BEAA-73D8C448D44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A259080B-D5E7-4171-BEAA-73D8C448D44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A259080B-D5E7-4171-BEAA-73D8C448D44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A259080B-D5E7-4171-BEAA-73D8C448D44D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECD8CEC-49E0-4015-934A-036CBD04673D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {550DA0DB-1317-48AA-92DC-FF4F74A4A4E9}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/Munirghali
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Core.AccessLayer\\Core.AccessLayer.csproj
+		SccProjectName1 = Core.AccessLayer
+		SccLocalPath1 = Core.AccessLayer
+		SccProjectUniqueName2 = Core.Admin\\Core.Admin.csproj
+		SccProjectName2 = Core.Admin
+		SccLocalPath2 = Core.Admin
+		SccProjectUniqueName3 = Core.Services\\Core.Services.csproj
+		SccProjectName3 = Core.Services
+		SccLocalPath3 = Core.Services
+		SccProjectUniqueName4 = Core.ViewModels\\Core.ViewModels.csproj
+		SccProjectName4 = Core.ViewModels
+		SccLocalPath4 = Core.ViewModels
+		SccProjectUniqueName5 = Database\\Database.sqlproj
+		SccProjectName5 = Database
+		SccLocalPath5 = Database
+	EndGlobalSection
+EndGlobal

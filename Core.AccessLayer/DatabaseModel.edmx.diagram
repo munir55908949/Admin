@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7b48c941daa24a989a2005737a7f5682" Name="Diagram1">
+        <EntityTypeShape EntityType="LaundryModel.Administration" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="16.375" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="32" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="LaundryModel.AspNetUsers" Width="1.5" PointX="3" PointY="13.875" />
+        <EntityTypeShape EntityType="LaundryModel.Bank" Width="1.5" PointX="10.5" PointY="22.5" />
+        <EntityTypeShape EntityType="LaundryModel.Company" Width="1.5" PointX="5.25" PointY="24.375" />
+        <EntityTypeShape EntityType="LaundryModel.ContractData" Width="1.5" PointX="12.75" PointY="18.125" />
+        <EntityTypeShape EntityType="LaundryModel.ContractStatus" Width="1.5" PointX="10.5" PointY="20.125" />
+        <EntityTypeShape EntityType="LaundryModel.Currency" Width="1.5" PointX="12.75" PointY="27.375" />
+        <EntityTypeShape EntityType="LaundryModel.DecreaseOrIncrease" Width="1.5" PointX="12.75" PointY="24.625" />
+        <EntityTypeShape EntityType="LaundryModel.GuaranteeSort" Width="1.5" PointX="5.25" PointY="28" />
+        <EntityTypeShape EntityType="LaundryModel.GuaranteeStatus" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="LaundryModel.Pages" Width="1.5" PointX="6" PointY="21.125" />
+        <EntityTypeShape EntityType="LaundryModel.Sector" Width="1.5" PointX="5.25" PointY="16.375" />
+        <EntityTypeShape EntityType="LaundryModel.Users_Pages" Width="1.5" PointX="8.25" PointY="16.25" />
+        <EntityTypeShape EntityType="LaundryModel.Warranty" Width="1.5" PointX="15" PointY="17.25" />
+        <EntityTypeShape EntityType="LaundryModel.WarrantyHistory" Width="1.5" PointX="17.25" PointY="17.5" />
+        <EntityTypeShape EntityType="LaundryModel.WarrantyType" Width="1.5" PointX="12.75" PointY="14.875" />
+        <AssociationConnector Association="LaundryModel.FK_Administration_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_Administration_Sector" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_Administration" />
+        <AssociationConnector Association="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LaundryModel.FK_AspNetUsers_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_Company_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_GuaranteeSort_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_GuaranteeStatus_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_Sector_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_Users_Pages_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_AspNetUsers" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_Bank" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_Company" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_ContractStatus" />
+        <AssociationConnector Association="LaundryModel.FK_ContractData_Sector" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_ContractData" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_Currency" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_DecreaseOrIncrease" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_DecreaseOrIncrease" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_GuaranteeSort" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_GuaranteeSort" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_GuaranteeStatus" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_GuaranteeStatus" />
+        <AssociationConnector Association="LaundryModel.FK_Users_Pages_Pages" />
+        <AssociationConnector Association="LaundryModel.FK_Warranty_WarrantyType" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_Warranty" />
+        <AssociationConnector Association="LaundryModel.FK_WarrantyHistory_WarrantyType" />
+        <AssociationConnector Association="LaundryModel.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

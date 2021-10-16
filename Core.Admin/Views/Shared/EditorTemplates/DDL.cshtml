@@ -1,0 +1,36 @@
+﻿@model object
+@using Kendo.Mvc.UI;
+@{
+    var list = (ViewData[ViewData.ModelMetadata.PropertyName] as IEnumerable<Core.ViewModels.BaseModel>);
+}
+@if (ViewBag.Disable == true && list != null)
+{
+    @(Html.Kendo().DropDownListFor(m => m)
+                                                        .DataValueField("Id")
+                                                        .Enable(false)
+                                                        .DataTextField("Name")
+                                                        .Filter("contains")
+                                                        .BindTo(list)
+    )
+}
+else if (list != null)
+{
+    if (ViewBag.IdString == true)
+    {
+        @(Html.Kendo().DropDownListFor(m => m)
+                                                       .DataValueField("IdString")
+                                                       .DataTextField("Name")
+                                                       .Filter("contains")
+                                                       .BindTo(list)
+        )
+    }
+    else
+    {
+        @(Html.Kendo().DropDownListFor(m => m)
+                                               .DataValueField("Id")
+                                               .DataTextField("Name")
+                                               .Filter("contains")
+                                               .BindTo(list)
+        )
+    }
+}

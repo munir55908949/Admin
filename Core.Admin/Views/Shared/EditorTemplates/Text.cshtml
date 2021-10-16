@@ -1,0 +1,10 @@
+﻿@model object
+@if (ViewBag.Disable == true)
+{
+    @Html.TextBoxFor(f => f, new { @class = "form-control", @readonly= "@readonly" })
+
+}
+else
+{
+    @Html.TextBoxFor(f => f, new { @class = "form-control" })
+}

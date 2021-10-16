@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNet.Identity
+@using Core.Services;
+@{
+    UsersServices _UsersServices = new UsersServices();
+    var listUserPages = _UsersServices.GetAllListPages(User.Identity.GetUserId());
+    string ctrName = ViewContext.RouteData.Values["controller"].ToString();
+    string actionName = ViewContext.RouteData.Values["action"].ToString();
+}
+<div class="main-navigation navbar-collapse collapse">
+    <!-- start: MAIN MENU TOGGLER BUTTON -->
+    <div class="navigation-toggler">
+        <i class="clip-chevron-left"></i>
+        <i class="clip-chevron-right"></i>
+    </div>
+    <!-- end: MAIN MENU TOGGLER BUTTON -->
+    <!-- start: MAIN NAVIGATION MENU -->
+    <ul class="main-navigation-menu">
+        <li @if (ctrName == "Home") { <text> class="active open" </text> }>
+            <a href="@Url.Action("Index", "Home")">
+                <i class="clip-home"></i>
+                <span class="title">الرئيســــية</span>
+            </a>
+        </li>
+        @foreach (var item in listUserPages)
+        {
+            if (!User.IsInRole("Admin"))
+            {
+                if (item.IsChecked)
+                {
+                    <li @if (ctrName == item.Url) { <text> class="active open" </text> }>
+                        <a href="@Url.Action("Index", item.Url)">
+                            <i class="@item.Icon"></i>
+                            <span class="title">@item.Name</span>
+                        </a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li @if (ctrName == item.Url) { <text> class="active open" </text> }>
+                    <a href="@Url.Action("Index", item.Url)">
+                        <i class="@item.Icon"></i>
+                        <span class="title">@item.Name</span>
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+    <!-- end: MAIN NAVIGATION MENU -->
+</div>

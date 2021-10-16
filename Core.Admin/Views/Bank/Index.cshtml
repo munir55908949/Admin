@@ -1,0 +1,146 @@
+﻿@model Core.Admin.Models.BankModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "البنوك";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="@Href("~/ViewsScripts/Bank/BankGrid.js")"></script>
+
+<div class="row">
+    <div class="col-sm-12">
+
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسية
+                </a>
+            </li>
+            <li class="active">
+                البنوك
+            </li>
+        </ol>
+
+    </div>
+</div>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Core.ViewModels.BankViewModel>
+()
+.Name("Grid")
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Id).Title("مسلسل").Filterable(false).Width("5%");
+
+    columns.Bound(p => p.Name).Title("اسم البنك").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Name??'-' #").Width("15%");
+
+    //columns.Bound(p => p.CreatedAt).Title("التاريخ").Filterable(ftb => ftb.Cell(cell => cell.Operator("eq").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedAt == null ? '-' :kendo.toString(kendo.parseDate(CreatedAt), 'yyyy/MM/dd') #").Width("10%");
+
+    //columns.Bound(p => p.CreatedByName).Title("معد الطلب").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedByName??'-'#").Width("7%");
+
+
+    columns.Bound("").Title("").ClientTemplate(
+                                                                                                                                    //"# {# <a  class=\"label label-default  k-button\" href=\"Bank/AddEdit/#:data.Id#\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                    //+ "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'Bank')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#"
+                                                                                                                                    "# {# <a  onclick='showPopup(\"#=Id#\")'  class=\"label label-default  k-button\" href=\"javascript:void(0);\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                + "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'Bank')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#"
+
+
+                                                                                                                                    ).Sortable(false).Width("15%");
+})
+.ToolBar(toolBar =>
+{
+    //toolBar.Template(c => @Html.ActionLink("إضافة بنك جديد", "AddEdit", null, new { @class = "k-button k-button-icontext", @style = "color:Darkred ; font-size:35px; background-color:#39ccee;" })) ;
+    toolBar.Template("<a class = \"k-button k-button-icontext\" style = \"color:white;font-size:30px;/* background-color:#020024; */background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%);border-radius: 10px;-webkit-border-radius: 15px;-moz-border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\" onclick='showPopup(0)' href=\"javascript:void(0);\">إضافة بنك جديد <i class='clip-pencil'></i></a>");
+})
+.Pageable(pageable => pageable
+.Refresh(true)
+.PageSizes(new int[] { 10, 20, 50, 100, 200, 500 })
+.ButtonCount(5).Messages(m =>
+{
+    m.Display("طلب");
+    m.Empty("لا يوجد طلبات");
+    m.ItemsPerPage("طلب بالصفحة");
+}))
+//.Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("نعم").DisplayDeleteConfirmation("هل أنت متأكد من الحذف").CancelDelete("لا"))
+.Sortable()
+.Filterable(ftb => ftb.Mode(GridFilterMode.Row))
+.HtmlAttributes(new { style = "tr{cursor: pointer;" })
+.DataSource(dataSource => dataSource
+.Ajax()
+.Batch(true)
+.ServerOperation(true)
+.Sort(sort => sort.Add("Id").Descending())
+.Events(events => events.Error("error_handler"))
+.Model(model =>
+{
+    model.Id(p => p.Id);
+})
+.PageSize(20)
+.Read(read => read.Action("Read", "Bank"))
+)
+
+                            )
+
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Error:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+</div>
+
+<script>
+    InializeDateH();
+
+    function InializeDateH() {
+        var calendar = $.calendars.instance('ummalqura', 'ar');
+        $('.datepickerPopup').calendarsPicker({ calendar: calendar, todayText: "اليوم", prevText: "السابق >>", nextText: "<< التالي", closeText: "اغلاق", clearText: "مسح" });
+    }
+    function showPopup(id) {
+        var url = '@Url.Action("AddEdit", "Bank")';
+        $.get(url, { id: id }, setData);
+        InializeDateH();
+    }
+    function setData(data) {
+        $('#myModal').modal({
+            keyboard: true
+        }, 'show');
+        $(".close").click($('#myModal').hide())
+        // putting the data to the pop up div
+        $("#itemdetailDiv").html(data);
+        // viewing the div as block
+        $("#itemdetailDiv").css("display", "block");
+    }
+    function CloseWindow() {
+        $("#PopupDiv").css("display", "none");
+    }
+</script>
+
+
+<!--PopUp-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 640px;">
+            <div id='myModalContent'>
+
+                <button type="button" onclick="CloseWindow()" class="close" data-dismiss="modal">x</button>
+                <div class="modal-body" id="itemdetailDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+</style>

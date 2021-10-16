@@ -1,0 +1,36 @@
+﻿@using Kendo.Mvc.UI;
+@model List<Core.ViewModels.SubChartViewModel>
+@{
+    Layout = null;
+    var name = (string)ViewData["Name"];
+    var title = (string)ViewData["Title"];
+    var type = (string)ViewData["Type"];
+    var hint = (string)ViewData["Hint"];
+    var max = Convert.ToDouble(ViewData["Max"]);
+    var step = Convert.ToInt32(ViewData["Step"]);
+}
+@section Head
+{
+    
+}@if (type == "BarChart")
+{
+    <div class="col-md-12">
+        @(Html.Kendo().Chart()
+        .Name("Report"+ name)
+        .Title(title + DateTime.Now.Year)
+           .HtmlAttributes(new { style = "height: 400px;" })
+        .Series(series =>
+        {
+            foreach (var item in Model)
+            {
+                series.Column(new decimal[] { item.Count  }).Name(item.Name)
+                .Labels(Label => Label.Visible(true).Template(item.Name + "\n #= value# ")).
+                Tooltip(tooltip => tooltip.Visible(true).Template(item.Name+"\n #= value# "));
+            }
+        }).CategoryAxis(axis => axis.Categories(m => Model.Select(f => f.Name).ToArray())
+        .Labels(labels => labels.Rotation(-90))
+                          ).ValueAxis(val => val.Numeric().Min(1).Max(max).MajorUnit(step)
+                          .Labels(s => s.Format("{0}")))
+    )
+    </div>
+}

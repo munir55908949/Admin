@@ -1,0 +1,3 @@
+﻿@using Core.Admin.Resources
+@using Kendo.Mvc.UI;
+@(Html.Kendo().Upload().Name("Picture").Events(events => { events.Upload("getParentID"); events.Select("onSelectResumeFile"); events.Success("onUploadSuccessFile"); }).Messages(messages => { messages.Select(Resource.Choose); }).Async(async => { async.Save("SaveFile", "Common"); async.AutoUpload(true); }).Multiple(false))

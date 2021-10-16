@@ -1,0 +1,71 @@
+﻿@model Core.Admin.Models.PagesModel
+@{
+    ViewBag.Title = "الصلاحيات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Href("~/ViewsScripts/Pages/Index.js")"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <!-- start: PAGE TITLE & BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسية
+                </a>
+            </li>
+            <li class="active">
+                الصلاحيات
+            </li>
+        </ol>
+        <!-- end: PAGE TITLE & BREADCRUMB -->
+    </div>
+</div>
+<!-- end: PAGE HEADER -->
+<!-- start: PAGE CONTENT -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                    بحث في الصلاحيات
+                    <div class="panel-tools">
+                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Search", "Pages", FormMethod.Post, new { Id = "frmSearch", enctype = "multipart/form-data" }))
+                    {
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        الأسم
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.Name, new { @class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="col-md-3 button-style">
+                                <button id="btnSearch" class="btn btn-blue" type="button">
+                                    بحث
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+
+
+            <div id="gridView" class="dataTables_wrapper form-inline" role="grid">
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,271 @@
+﻿@model Core.Admin.Models.SectorModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "القطاعات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="@Href("~/ViewsScripts/Sector/SectorGrid.js")"></script>
+
+<div class="row">
+    <div class="col-sm-12">
+
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسيـــة
+                </a>
+            </li>
+            <li class="active">
+                القطاعات
+            </li>
+        </ol>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                    بحــث في القطاعات
+                    <div class="panel-tools">
+                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Search", "Sector", FormMethod.Post, new { Id = "frmSearch", enctype = "multipart/form-data" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            اســم القطاع
+                                        </label>
+                                        @(Html.Kendo().DropDownListFor(m => m.Id)
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.SectorNameList)
+                                            ))
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            ملاحظات
+                                        </label>
+                                        @Html.TextBoxFor(m => Model.Note, new { @class = "form-control", @placeholder = "البحــث بالملاحظات" })
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            تاريـخ تسجيـل القطاع
+                                        </label>
+                                        @(Html.Kendo().DateTimePickerFor(m =>m.CreatedAt ).Format("yyyy/MM/dd").Name("RegisteDate"))
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            منفــذ المعامـلة
+                                        </label>
+                                        @Html.TextBoxFor(m => Model.CreatedBy, new { @class = "form-control", @placeholder = "البحــث باسم منفــذ المعامـلة" })
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1 button-style">
+                                    <button id="btnSearch" class="btn btn-blue" type="button">
+                                        بحـــــث
+                                    </button>
+                                </div>
+                                <div class="col-md-1 button-style">
+                                    <button id="btnReport" onclick="ExportReport()" class="btn btn-yellow" type="button">
+                                        طبـــــاعة تقريـــر بالقطاعات <i class="fa fa-print"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Core.ViewModels.SectorViewModel>
+()
+.Name("Grid")
+.Columns(columns =>
+{
+
+    columns.Bound(p => p.Id).Title("مسلسل").Filterable(false).Width("5%");
+
+    columns.Bound(p => p.Id).Hidden();
+
+    columns.Bound(p => p.Name).Title("اســم القطاع").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Name??'-' #").Width("15%");
+
+    columns.Bound(p => p.Note).Title("ملاحظات").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Note??'-' #").Width("15%");
+
+    columns.Bound(p => p.CreatedAt).Title("تاريخ تسجيل القطاع").Filterable(ftb => ftb.Cell(cell => cell.Operator("eq").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedAt == null ? '-' :kendo.toString(kendo.parseDate(CreatedAt), 'yyyy/MM/dd') #").Width("10%");
+
+    columns.Bound(p => p.CreatedByName).Title("منفــذ المعامـلة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedByName??'-'#").Width("7%");
+
+
+    columns.Bound("").Title("").ClientTemplate("# {# <a  onclick='showPopup(\"#=Id#\")'  class=\"label label-default  k-button\" href=\"javascript:void(0);\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#" + "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'Sector')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#" ).Sortable(false).Width("15%");
+})
+.ToolBar(toolBar =>
+{
+    toolBar.Template("<a class = \"k-button k-button-icontext\" style = \"color:white;font-size:30px;/* background-color:#020024; */background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%);border-radius: 10px;-webkit-border-radius: 15px;-moz-border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\" onclick='showPopup(0)' href=\"javascript:void(0);\"> إضافــة قطاع جديــد <i class='clip-pencil'></i></a>");
+})
+.Pageable(pageable => pageable
+.Refresh(true)
+.PageSizes(new int[] { 10, 20, 50, 100, 200, 500 })
+.ButtonCount(5).Messages(m =>
+{
+    m.Display("طلب");
+    m.Empty("لا يوجد طلبات");
+    m.ItemsPerPage("طلب بالصفحة");
+}))
+.Sortable()
+.Filterable(ftb => ftb.Enabled(false))        //Filter without Kendo
+/*.Filterable(ftb => ftb.Mode(GridFilterMode.Row))*/ //===> Filter with Kendo
+.HtmlAttributes(new { style = "tr{cursor: pointer;" })
+.DataSource(dataSource => dataSource
+.Ajax()
+.Batch(true)
+.ServerOperation(true)
+.Sort(sort => sort.Add("Id").Descending())
+.Events(events => events.Error("error_handler"))
+.Model(model =>
+{
+    model.Id(p => p.Id);
+})
+.PageSize(20)
+.Read(read => read.Action("Read", "Sector"))
+)
+
+)
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Error:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+</div>
+<script>
+    InializeDateH();
+    function InializeDateH() {
+        var calendar = $.calendars.instance('ummalqura', 'ar');
+        $('.datepickerPopup').calendarsPicker({ calendar: calendar, todayText: "اليوم", prevText: "السابق >>", nextText: "<< التالي", closeText: "اغلاق", clearText: "مسح" });
+    }
+    function showPopup(id) {
+        var url = '@Url.Action("AddEdit", "Sector")';
+        $.get(url, { id: id }, setData);
+        InializeDateH();
+    }
+    function setData(data) {
+        $('#myModal').modal({
+            keyboard: true
+        }, 'show');
+        $(".close").click($('#myModal').hide())
+        // putting the data to the pop up div
+        $("#itemdetailDiv").html(data);
+        // viewing the div as block
+        $("#itemdetailDiv").css("display", "block");
+    }
+    function CloseWindow() {
+        $("#PopupDiv").css("display", "none");
+    }
+</script>
+<!--PopUp-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 770px; height: 525px !important ">
+            <div id='myModalContent'>
+
+                <button type="button" onclick="CloseWindow()" class="close" data-dismiss="modal">x</button>
+                <div class="modal-body" id="itemdetailDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+                    $(function () {
+
+                            $('#DesignVacation_DepartureDate').datepicker({
+                                dateFormat: 'dd/mm/yy'
+                            });
+
+                    });
+                 $("#btnSearch").click(function () {
+                     var Id = $("#Id").val();
+                     var CreatedAt = $("#RegisteDate").val();
+                     var Note = $("#Note").val();
+                     var CreatedBy = $("#CreatedBy").val();
+
+        var filters = [];
+                     if ( Id > 0)
+                         filters.push({ field: "Id", operator: "eq", value: Id });
+                     if (CreatedAt.length > 0)
+                         filters.push({ field: "CreatedAt", operator: "eq", value: CreatedAt });
+                     if (CreatedBy.length > 0)
+                         filters.push({ field: "Note", operator: "contains", value: Note });
+                     if (CreatedBy.length > 0)
+                         filters.push({ field: "CreatedByName", operator: "contains", value: CreatedBy });
+
+        var grid = $("#Grid").data("kendoGrid");
+        var dataSource = grid.dataSource;
+        dataSource.filter({
+            logic: "and",
+            filters: filters
+        });
+        grid.dataSource.read();
+    });
+    function ExportReport() {
+        $("#loadingPanel").show();
+        var Id = $("#Id").val();
+        var CreatedAt = $("#RegisteDate").val();
+        var Note = $("#Note").val();
+        var CreatedBy = $("#CreatedBy").val();
+         $.ajax({
+            url: '@Url.Action("ExportReport")',
+            type: 'Post',
+            cache: false,
+             data: { Id,  CreatedAt, CreatedBy},
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }
+</script>

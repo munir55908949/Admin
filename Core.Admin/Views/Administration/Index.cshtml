@@ -1,0 +1,283 @@
+﻿@model Core.Admin.Models.AdministrationModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "الإدارات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script type="text/javascript" src="@Href("~/ViewsScripts/Administration/AdministrationGrid.js")"></script>*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيســية
+                </a>
+            </li>
+            <li class="active">
+                الإدارات
+            </li>
+        </ol>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                    بحـــث في الإدارات
+                    <div class="panel-tools">
+                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Search", "Administration", FormMethod.Post, new { Id = "frmSearch", enctype = "multipart/form-data" }))
+                    {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        إسم الإدارة
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.Name, new { @class = "form-control", @placeholder = "البحــث بإسم الإدارة" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        القطاع
+                                    </label>
+                                    @*@Html.DropDownListFor(m => Model.BankId, Model.BankList, new { @class = "form-control" })*@
+                                    @(Html.Kendo().DropDownListFor(m => m.SectorId)
+                                             .Name("SectorName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.SectorList)
+                                            ))
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        ملاحظــات
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.Note, new { @class = "form-control", @placeholder = "البحث بالملاحظات" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        منفــذ المعامــلة
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.CreatedBy, new { @class = "form-control", @placeholder = "البحث بمنفذ المعاملة" })
+                                </div>
+                            </div>
+                            <div class="col-md-2 button-style">
+                                <div class="form-group">
+                                    <button id="btnSearch" class="btn btn-blue" type="button" style="font-size: medium">
+                                        بحــــث  <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 button-style">
+                                <div class="form-group">
+                                    <button id="btnReport" onclick="ExportReport()" class="btn btn-yellow" type="button" style="font-size: medium">
+                                        طبـــاعة تقـريـر <i class="fa fa-print"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     }
+                     </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Core.ViewModels.AdministrationViewModel>
+()
+.Name("Grid")
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Id).Title("مسلسل").Filterable(false).Width("5%");
+
+    columns.Bound(p => p.Name).Title("إسم الإدارة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Name??'-'#").Width("6%");
+
+    columns.Bound(p => p.SectorName).Title("القطاع").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=SectorName??'-'#").Width("8%");
+
+    columns.Bound(p => p.Note).Title("ملاحظات").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Note??'-'#").Width("10%");
+
+    columns.Bound(p => p.CreatedByName).Title("منفذ المعاملة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedByName??'-'#").Width("5%");
+
+    columns.Bound("").Title(" تعديـل |  حـذف").ClientTemplate(
+
+                                                                                                                                 "# {# <a  onclick='showPopup(\"#=Id#\")'  class=\"label label-default  k-button\" href=\"javascript:void(0);\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                + "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'Administration')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#"
+                                                                                                                                    ).Sortable(false).Width("15%");
+})
+.ToolBar(toolBar =>
+{
+    //toolBar.Template(c => @Html.ActionLink("إضافة كفالة جديدة", "AddEdit", null, new { @class = "addBtn k-button k-button-icontext", @style = "color:Darkred ; font-size:35px; background-color:#39ccee;" }));
+    toolBar.Template("<a class = \"k-button k-button-icontext\" style = \"color:white;font-size:30px;/* background-color:#020024; */background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%);border-radius: 10px;-webkit-border-radius: 15px;-moz-border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\" onclick='showPopup(0)' href=\"javascript:void(0);\">إضافــة بيانات إدارة جديــدة <i class='clip-pencil'></i></a>") ;
+})
+.Pageable(pageable => pageable
+.Refresh(true)
+.PageSizes(new int[] { 10, 20, 50, 100, 200, 500 })
+.ButtonCount(5).Messages(m =>
+{
+    m.Display("طلب");
+    m.Empty("لا يوجد طلبات");
+    m.ItemsPerPage("طلب بالصفحة");
+}))
+//.Editable(editable => editable.Mode(GridEditMode.InLine).ConfirmDelete("نعم").DisplayDeleteConfirmation("هل أنت متأكد من الحذف").CancelDelete("لا"))
+.Sortable()
+.Filterable(ftb => ftb.Enabled(false))
+.HtmlAttributes(new { style = "tr{cursor: pointer;" })
+.DataSource(dataSource => dataSource
+.Ajax()
+.Batch(true)
+.ServerOperation(true)
+.Sort(sort => sort.Add("Id").Descending())
+.Events(events => events.Error("error_handler"))
+.Model(model =>
+{
+    model.Id(p => p.Id);
+})
+.PageSize(20)
+.Read(read => read.Action("Read", "Administration"))
+)
+
+ )
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Error:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+</div>
+<script>
+    InializeDateH();
+    function InializeDateH() {
+        var calendar = $.calendars.instance('ummalqura', 'ar');
+        $('.datepickerPopup').calendarsPicker({ calendar: calendar, todayText: "اليوم", prevText: "السابق >>", nextText: "<< التالي", closeText: "اغلاق", clearText: "مسح" });
+    }
+</script>
+<script>
+    function showPopup(id) {
+            var url = '@Url.Action("AddEdit", "Administration")';
+            $.get(url, { id: id }, setData);
+            InializeDateH();
+            }
+            function setData(data) {
+            $('#myModal').modal({
+            keyboard: true
+            }, 'show');
+            $(".close").click($('#myModal').hide())
+            // putting the data to the pop up div
+            $("#itemdetailDiv").html(data);
+            // viewing the div as block
+            $("#itemdetailDiv").css("display", "block");
+            }
+            function CloseWindow() {
+            $("#PopupDiv").css("display", "none");
+            }
+</script>
+<!--PopUp-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 1330px; height: 700px !important; top: 50%; left: 80% ">
+            <div id='myModalContent'>
+
+                <button type="button" onclick="CloseWindow()" class="close" data-dismiss="modal">x</button>
+                <div class="modal-body" id="itemdetailDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+                    $(function () {
+
+                            $('#DesignVacation_DepartureDate').datepicker({
+                                dateFormat: 'dd/mm/yy'
+                            });
+
+                    });
+                 $("#btnSearch").click(function () {
+                        var Name = $("#Name").val();
+                        var SectorId = $("#SectorName").val();
+                        var Note = $("#Note").val();
+                        var CreatedBy = $("#CreatedBy").val();
+
+        var filters = [];
+                        if (Name.length > 0)
+                            filters.push({ field: "Name", operator: "contains", value: Name });
+
+                     if (SectorId > 0)
+                            filters.push({ field: "SectorId", operator: "eq", value: SectorId });
+
+                        if (Note.length > 0)
+                         filters.push({ field: "Note", operator: "contains", value: Note });
+
+                        if (CreatedBy.length > 0)
+                            filters.push({ field: "CreatedByName", operator: "contains", value: CreatedBy });
+        var grid = $("#Grid").data("kendoGrid");
+        var dataSource = grid.dataSource;
+        dataSource.filter({
+            logic: "and",
+            filters: filters
+        });
+        grid.dataSource.read();
+    });
+    function ExportReport() {
+        $("#loadingPanel").show();
+        var Name = $("#Name").val();
+        var SectorId = $("#SectorName").val();
+        var Note = $("#Note").val();
+        var CreatedBy = $("#CreatedBy").val();
+         $.ajax({
+            url: '@Url.Action("ExportReport")',
+            type: 'Post',
+            cache: false,
+             data: { Name, SectorId,  Note, CreatedBy},
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }
+</script>
+@Scripts.Render("~/bundles/jqueryval")

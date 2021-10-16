@@ -1,0 +1,619 @@
+﻿@model Core.Admin.Models.WarrantyModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "خطابات الضمان";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script type="text/javascript" src="@Href("~/ViewsScripts/Warranty/WarrantyGrid.js")"></script>*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيســـــية
+                </a>
+            </li>
+            <li class="active">
+                خطابات الضمان
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- start: PAGE CONTENT   بيانات العقد -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                    بيانات العقــــــــد
+                    <div class="panel-tools">
+                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("AddEditDetails", "ContractData", FormMethod.Post, new { @Id = "frmAddEditDetails", @role = "form", onsubmit = "ShowLoading();" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => Model.ContractDataId)
+                        <div class="row">
+                            @Html.HiddenFor(x => x.Id)
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        رقم العقــــــــد
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.ContractNumber, new { @class = "form-control", @disabled = "disabled" })
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        القطاع
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.SectorName, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        الإدارة
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.AdministrationName, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        الشـــــركـة
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.CompanyName, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        البنك
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.BankName, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        حالة العقــــــــد
+                                    </label>
+                                    @Html.TextBoxFor(m => Model.ContractStatusName, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <i class="fa fa-external-link-square"></i>
+                                                بحــث في خطابات الضمان
+                                                <div class="panel-tools">
+                                                    <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                @using (Html.BeginForm("Search", "Warranty", FormMethod.Post, new { Id = "frmSearch", enctype = "multipart/form-data" }))
+                                                {
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        رقم العقد
+                                                                    </label>
+                                                                    @Html.TextBoxFor(m => Model.ContractNumber, new { @class = "form-control", @placeholder = "البحث برقــم العقد" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        رقـــم الكفالة
+                                                                    </label>
+                                                                    @Html.TextBoxFor(m => Model.WarrantyNumber, new { @class = "form-control", @placeholder = "البحث برقــم الكفالة" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        قيمــة الكفالة
+                                                                    </label>
+                                                                    @Html.TextBoxFor(m => Model.WarrantyValue, new { @class = "form-control", @placeholder = "البحــث بقيمة الكفالة" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        العملة
+                                                                    </label>
+                                                                    @(Html.Kendo().DropDownListFor(m => m.CurrencyId)
+                                                                 .Name("CurrencyName")
+                                                                .Filter("contains")
+                                                                .HtmlAttributes(new { @style="width:100%"})
+                                                                .BindTo((Model.CurrencyList)
+                                                                ))
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        حالة مبلغ الكفالة
+                                                                    </label>
+                                                                    @(Html.Kendo().DropDownListFor(m => m.DecreaseOrIncreaseId)
+                                                                 .Name("DecreaseOrIncreaseName")
+                                                                .Filter("contains")
+                                                                .HtmlAttributes(new { @style="width:100%"})
+                                                                .BindTo((Model.DecreaseOrIncreaseList)
+                                                                ))
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">
+                                                                        قيمة المبلغ
+                                                                    </label>
+                                                                    @Html.TextBoxFor(m => Model.DecreaseOrIncreaseValue, new { @class = "form-control", @placeholder = "البحــث بقيمة المبلغ" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                حــالة الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DropDownListFor(m => m.GuaranteeStatusId)
+                                                                 .Name("GuaranteeStatusName")
+                                                                .Filter("contains")
+                                                                .HtmlAttributes(new { @style="width:100%"})
+                                                                .BindTo((Model.GuaranteeStatusList)
+                                                                ))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                تصنيف الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DropDownListFor(m => m.GuaranteeSortId)
+                                                                 .Name("GuaranteeSortName")
+                                                                .Filter("contains")
+                                                                .HtmlAttributes(new { @style="width:100%"})
+                                                                .BindTo((Model.GuaranteeSortList)
+                                                                ))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                نوع الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DropDownListFor(m => m.WarrantyTypeId)
+                                                                 .Name("WarrantyTypeName")
+                                                                .Filter("contains")
+                                                                .HtmlAttributes(new { @style="width:100%"})
+                                                                .BindTo((Model.WarrantyTypeList)
+                                                                ))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                تاريخ إصدار الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DateTimePickerFor(m =>m.GuaranteeIssueDate ).Format("yyyy/MM/dd").Name("IssueDate"))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                From
+                                                                            </label>
+                                                                            @(Html.Kendo().DateTimePicker( ).Format("yyyy/MM/dd").Name("From"))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                To
+                                                                            </label>
+                                                                            @(Html.Kendo().DateTimePicker( ).Format("yyyy/MM/dd").Name("To"))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                تاريخ بداية الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DateTimePickerFor(m =>m.GuaranteeStartDate ).Format("yyyy/MM/dd").Name("StartDate"))
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                تاريخ إنتهاء الكفالة
+                                                                            </label>
+                                                                            @(Html.Kendo().DateTimePickerFor(m =>m.GuaranteeEndDate ).Format("yyyy/MM/dd").Name("EndDate"))
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                ملاحظـــــات
+                                                                            </label>
+                                                                            @Html.TextBoxFor(m => Model.NoteWarranty, new { @class = "form-control", @placeholder = "البحــث بالملاحظــات" })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="form-group">
+                                                                            <label class="control-label">
+                                                                                منفــذ المعامــلة
+                                                                            </label>
+                                                                            @Html.TextBoxFor(m => Model.CreatedBy, new { @class = "form-control", @placeholder = "البحــث باسم منفــذ المعامــلة" })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2">
+                                                                        <div class="col-md-2 button-style">
+                                                                            <button id="btnSearch" class="btn btn-blue" type="button" style="font-size: medium">
+                                                                                بحــــث  <i class="fa fa-search"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-2 button-style">
+                                                                        <button id="btnReport" onclick="ExportReport()" class="btn btn-yellow" type="button" style="font-size: medium">
+                                                                            طبــــــاعة تقـريـر <i class="fa fa-print"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="k-rtl">
+    @(Html.Kendo().Grid<Core.ViewModels.WarrantyViewModel>
+()
+.Name("Grid")
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Id).Title("مسلسل").Filterable(false).Width("1%");
+
+    columns.Bound(p => p.ContractNumber).Title("رقم العقد").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=ContractNumber??'-'#").Width("4%");
+
+    columns.Bound(p => p.WarrantyNumber).Title("رقم الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=WarrantyNumber??'-'#").Width("4%");
+
+    columns.Bound(p => p.WarrantyValue).Title("قيمة الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=WarrantyValue??'-'#").Width("4%");
+
+    columns.Bound(p => p.CurrencyName).Title("العملة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CurrencyName??'-'#").Width("2%");
+
+    columns.Bound(p => p.DecreaseOrIncreaseName).Title("حالة مبلغ الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=DecreaseOrIncreaseName??'-'#").Width("4%");
+
+    columns.Bound(p => p.DecreaseOrIncreaseValue).Title("قيمة المبلغ").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=DecreaseOrIncreaseValue??'-'#").Width("3%");
+
+    columns.Bound(p => p.GuaranteeStatusName).Title("حالة الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=GuaranteeStatusName??'-'#").Width("3%");
+
+    columns.Bound(p => p.GuaranteeSortName).Title("تصنيف الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=GuaranteeSortName??'-'#").Width("4%");
+
+    columns.Bound(p => p.WarrantyTypeName).Title("نوع الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=WarrantyTypeName??'-'#").Width("2%");
+
+    columns.Bound(p => p.GuaranteeIssueDate).Title(" إصدار الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("eq").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=GuaranteeIssueDate == null ? '-' :kendo.toString(kendo.parseDate(GuaranteeIssueDate), 'yyyy/MM/dd') #").Width("5%");
+
+    columns.Bound(p => p.GuaranteeStartDate).Title(" بداية الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("eq").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=GuaranteeStartDate == null ? '-' :kendo.toString(kendo.parseDate(GuaranteeStartDate), 'yyyy/MM/dd') #").Width("5%");
+
+    columns.Bound(p => p.GuaranteeEndDate).Title(" إنتهاء الكفالة").Filterable(ftb => ftb.Cell(cell => cell.Operator("eq").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=GuaranteeEndDate == null ? '-' :kendo.toString(kendo.parseDate(GuaranteeEndDate), 'yyyy/MM/dd') #").Width("5%");
+
+    columns.Bound(p => p.NoteWarranty).Title("ملاحظات").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=NoteWarranty??'-'#").Width("4%");
+
+    columns.Bound(p => p.CreatedByName).Title("منفذ المعاملة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedByName??'-'#").Width("4%");
+
+    columns.Bound(p => p.Path).Title("مرفقات").Filterable(false).ClientTemplate("# if(data.Path == null){'-'}else{# <a   href=\"/FilesUpload/#:data.Path#\" title='نحميل' target=\"_blanc\"><i class=\"fa fa-eye\" style=\"color:blue\"></i></a>#}#").Width("3%");
+    columns.Bound("").Title(" تعديـل  | حـذف").ClientTemplate(
+                                                                                                                                 "# {# <a  onclick='showPopupDetails(\"#=Id#\")'  class=\"label label-default  k-button\" href=\"javascript:void(0);\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                + "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'Warranty')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#"
+                                                                                                                                    ).Sortable(false).Width("7%");
+})
+.ToolBar(toolBar =>
+{
+    toolBar.Template("<a class = \"k-button k-button-icontext\" style = \"color:white;font-size:30px;/* background-color:#020024; */background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%);border-radius: 10px;-webkit-border-radius: 15px;-moz-border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\" onclick='showPopupDetails(0)' href=\"javascript:void(0);\">إضافــة بيانات كفالة جديــدة <i class='clip-pencil'></i></a>") ;
+})
+.Pageable(pageable => pageable
+.Refresh(true)
+.PageSizes(new int[] { 10, 20, 50, 100, 200, 500 })
+.ButtonCount(5).Messages(m =>
+{
+    m.Display("طلب");
+    m.Empty("لا يوجد طلبات");
+    m.ItemsPerPage("طلب بالصفحة");
+}))
+.Sortable()
+.Filterable(ftb => ftb.Enabled(false))
+.HtmlAttributes(new { style = "tr{cursor: pointer;" })
+.DataSource(dataSource => dataSource
+.Ajax()
+.Batch(true)
+.ServerOperation(true)
+.Sort(sort => sort.Add("Id").Descending())
+.Events(events => events.Error("error_handler"))
+.Model(model =>
+{
+    model.Id(p => p.Id);
+})
+.PageSize(20)
+.Read(read => read.Action("Read", "Warranty", new { contractDataId = Model.ContractDataId }))
+)
+
+ )
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Error:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+</div>
+
+<script>
+    InializeDateH();
+
+    function InializeDateH() {
+        var calendar = $.calendars.instance('ummalqura', 'ar');
+        $('.datepickerPopup').calendarsPicker({ calendar: calendar, todayText: "اليوم", prevText: "السابق >>", nextText: "<< التالي", closeText: "اغلاق", clearText: "مسح" });
+    }
+
+</script>
+<script>
+    function showPopupDetails(id) {
+        var url = '@Url.Action("AddEdit", "Warranty")';
+        $.get(url, { id: id, contractDataId : '@Model.ContractDataId' }, setData);
+            InializeDateH();
+    }
+
+            function setData(data) {
+            $('#myModal').modal({ keyboard: true}, 'show');
+            $(".close").click($('#myModal').hide())
+            // putting the data to the pop up div
+            $("#itemdetailDiv").html(data);
+            // viewing the div as block
+            $("#itemdetailDiv").css("display", "block");
+    }
+
+            function CloseWindow() {
+            $("#PopupDiv").css("display", "none");
+            }
+</script>
+<!--PopUp-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'>
+
+                <button type="button" onclick="CloseWindow()" class="close" data-dismiss="modal">x</button>
+                <div class="modal-body" id="itemdetailDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+<style>
+    .tabbable {
+        width: 1310px !important;
+        height: 1100px;
+        padding: 10px;
+        margin: 10px auto;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(183,240,251,1) 100%);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+        -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+        -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    }
+
+        .tabbable .inner-wrap {
+            padding: 5px;
+            margin: 10px 10px 10px 10px;
+            background: #F8F8F8;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .tabbable h2 {
+            background: #2A88AD;
+            padding: 10px 10px 10px 10px;
+            margin: 10px 10px 10px 10px;
+            border-radius: 10px 10px 0 0;
+            -webkit-border-radius: 10px 10px 0 0;
+            -moz-border-radius: 10px 10px 0 0;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+            font: normal 30px 'Bitter', serif;
+            -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            border: 1px solid #257C9E;
+        }
+
+    .control-label {
+        font: normal 30px 'Bitter', serif !important;
+    }
+
+    .tab-content {
+        border: 1px solid #DDDDDD !important;
+        padding: 61px 18px !important;
+        position: relative !important;
+    }
+
+    .k-textbox {
+        font: normal 20px 'Bitter', serif !important;
+        background: rgb(2,0,36);
+        background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,120,1) 0%, rgba(237,249,250,1) 0%) !important;
+    }
+
+    .k-input {
+        font: normal 20px 'Bitter', serif !important;
+    }
+
+    .main-navigation navbar-collapse collapse {
+        width: auto !important;
+    }
+</style>
+<script>
+
+                    $(function () {
+
+                            $('#DesignVacation_DepartureDate').datepicker({
+                                dateFormat: 'dd/mm/yy'
+                            });
+
+                    });
+                 $("#btnSearch").click(function () {
+                     var ContractNumber = $("#ContractNumber").val();
+                     var WarrantyNumber = $("#WarrantyNumber").val();
+                     var WarrantyValue = $("#WarrantyValue").val();
+                     var CurrencyId = $("#CurrencyName").val();
+                     var GuaranteeStatusId = $("#GuaranteeStatusName").val();
+                     var GuaranteeSortId = $("#GuaranteeSortName").val();
+                     var WarrantyTypeId = $("#WarrantyTypeName").val();
+                     var DecreaseOrIncreaseId = $("#DecreaseOrIncreaseName").val();
+                     var DecreaseOrIncreaseValue = $("#DecreaseOrIncreaseValue").val();
+                     var GuaranteeIssueDate = $("#IssueDate").val();
+                     var GuaranteeStartDate = $("#StartDate").val();
+                     var GuaranteeEndDate = $("#EndDate").val();
+                     var From = $("#From").val();
+                     var To = $("#To").val();
+                     var NoteWarranty = $("#NoteWarranty").val();
+                     var CreatedBy = $("#CreatedBy").val();
+
+
+        var filters = [];
+                     if (ContractNumber.length > 0)
+                         filters.push({ field: "ContractNumber", operator: "contains", value: ContractNumber });
+                     if (WarrantyNumber.length > 0)
+                         filters.push({ field: "WarrantyNumber", operator: "contains", value: WarrantyNumber });
+                     if (WarrantyValue.length > 0)
+                         filters.push({ field: "WarrantyValue", operator: "eq", value: WarrantyValue });
+                     if (CurrencyId > 0)
+                         filters.push({ field: "CurrencyId", operator: "eq", value: CurrencyId });
+                     if (GuaranteeStatusId > 0)
+                         filters.push({ field: "GuaranteeStatusId", operator: "eq", value: GuaranteeStatusId });
+                     if (GuaranteeSortId > 0)
+                         filters.push({ field: "GuaranteeSortId", operator: "eq", value: GuaranteeSortId });
+                     if (WarrantyTypeId > 0)
+                         filters.push({ field: "WarrantyTypeId", operator: "eq", value: WarrantyTypeId });
+                     if (DecreaseOrIncreaseId > 0)
+                         filters.push({ field: "DecreaseOrIncreaseId", operator: "eq", value: DecreaseOrIncreaseId });
+                     if (DecreaseOrIncreaseValue.length > 0)
+                         filters.push({ field: "DecreaseOrIncreaseValue", operator: "eq", value: DecreaseOrIncreaseValue });
+                     if (GuaranteeIssueDate.length > 0)
+                         filters.push({ field: "GuaranteeIssueDate", operator: "eq", value: GuaranteeIssueDate });
+                     if (GuaranteeStartDate.length > 0)
+                         filters.push({ field: "GuaranteeStartDate", operator: "eq", value: GuaranteeStartDate });
+                     if (GuaranteeEndDate.length > 0)
+                         filters.push({ field: "GuaranteeEndDate", operator: "eq", value: GuaranteeEndDate });
+                     if (From.length > 0)
+                         filters.push({ field: "GuaranteeEndDate", operator: "gte", value: From });
+                     if (To.length > 0)
+                         filters.push({ field: "GuaranteeEndDate", operator: "lte", value: To });
+                     if (NoteWarranty.length > 0)
+                         filters.push({ field: "NoteWarranty", operator: "contains", value: NoteWarranty });
+                     if (ContractDataId > 0)
+                         filters.push({ field: "ContractDataId", operator: "eq", value: ContractDataId });
+                     if (CreatedBy.length > 0)
+                         filters.push({ field: "CreatedByName", operator: "contains", value: CreatedBy });
+        var grid = $("#Grid").data("kendoGrid");
+                     var dataSource = grid.dataSource;
+                     dataSource.filter({
+                         logic: "and",
+                         filters: filters
+                     });
+                     grid.dataSource.read();
+
+    });
+    function ExportReport() {
+        $("#loadingPanel").show();
+        var ContractNumber = $("#ContractNumber").val();
+        var WarrantyNumber = $("#WarrantyNumber").val();
+        var WarrantyValue = $("#WarrantyValue").val();
+        var CurrencyId = $("#CurrencyName").val();
+        var GuaranteeStatusId = $("#GuaranteeStatusName").val();
+        var GuaranteeSortId = $("#GuaranteeSortName").val();
+        var WarrantyTypeId = $("#WarrantyTypeName").val();
+        var DecreaseOrIncreaseId = $("#DecreaseOrIncreaseName").val();
+        var DecreaseOrIncreaseValue = $("#DecreaseOrIncreaseValue").val();
+        var GuaranteeIssueDate = $("#GuaranteeIssueDate").val();
+        var GuaranteeStartDate = $("#GuaranteeStartDate").val();
+        var GuaranteeEndDate = $("#GuaranteeEndDate").val();
+        var NoteWarranty = $("#NoteWarranty").val();
+        var ContractDataId = '@Model.ContractDataId';
+        var CreatedBy = $("#CreatedBy").val();
+        var From = $("#From").val();
+        var To = $("#To").val();
+        $.ajax({
+            url: '@Url.Action("ExportReport")',
+            type: 'Post',
+            cache: false,
+            data: { ContractNumber, WarrantyNumber, WarrantyValue, CurrencyId,GuaranteeStatusId, GuaranteeSortId, WarrantyTypeId, DecreaseOrIncreaseId, DecreaseOrIncreaseValue, GuaranteeIssueDate, GuaranteeStartDate, GuaranteeEndDate, NoteWarranty, ContractDataId, From,To,CreatedBy },
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }
+</script>
+@Scripts.Render("~/bundles/jqueryval")

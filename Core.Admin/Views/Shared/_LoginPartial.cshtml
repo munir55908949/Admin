@@ -1,0 +1,134 @@
+﻿@using Microsoft.AspNet.Identity
+
+@using Core.Services;
+@{
+    UsersServices _UsersServices = new UsersServices();
+    var listUserPages = _UsersServices.GetAllListPages(User.Identity.GetUserId());
+    string ctrName = ViewContext.RouteData.Values["controller"].ToString();
+    string actionName = ViewContext.RouteData.Values["action"].ToString();
+}
+@if (listUserPages.Any(x => x.Url == "Warranty"))
+{
+    <!-- start: NOTIFICATION DROPDOWN -->
+    <li class="dropdown">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <i class="clip-bubble-3"></i>
+            <span class="badge reqCount"> </span>
+        </a>
+        <ul class="dropdown-menu notifications reqList">
+        </ul>
+    </li>
+    <li class="dropdown">
+        @*<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+                <i class="clip-list-5"></i>
+                <span class="badge reqCount"></span>
+            </a>
+            <ul class="dropdown-menu notifications reqList">
+                        </ul>
+                        <div class="ps-scrollbar-x-rail" style="width: 270px; display: none; left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 250px; display: none; right: 3px;"><div class="ps-scrollbar-y" style="top: 0px; height: 0px;"></div></div>*@
+
+    </li>
+    <!-- end: NOTIFICATION DROPDOWN -->
+    @*<script>
+
+
+        $(document).ready(function () {
+                    reqCall();
+            setInterval(reqCall, 30000);//call this methode every 3 minuts
+
+
+
+                   function reqCall() {
+
+                            $.ajax({
+                                type: "POST",
+                                url:   '@Url.Action("NoticationInbox", "Guarantee")',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (result) {
+                                    if (result) {
+                                        var obj = result;
+                                        $('.reqCount').html(obj.Count);
+                                        $('.reqList').html(obj.Message);
+                                    }
+                                    else
+                                    {
+                                      $('.reqCount').html("");
+                                      $('.reqList').html("");
+                                    }
+                                }
+                            });
+                        }
+
+                });
+
+
+            </script>*@
+    <script>
+
+
+$(document).ready(function () {
+            reqCall();
+    setInterval(reqCall, 30000);//call this methode every 3 minuts
+
+
+
+           function reqCall() {
+
+                    $.ajax({
+                        type: "POST",
+                        url:   '@Url.Action("NotificationInbox", "Warranty")',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (result) {
+                            if (result) {
+                                var obj = result;
+                                $('.reqCount').html(obj.Count);
+                                $('.reqList').html(obj.Message);
+                            }
+                            else
+                            {
+                              $('.reqCount').html("");
+                              $('.reqList').html("");
+                            }
+                        }
+                    });
+                }
+
+        });
+
+
+    </script>
+
+}
+<li class="dropdown current-user">
+    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+        <img src="~/Content/img/logo_home.jpg" style="width:30px !important;height  :30px !important;" class="circle-img" alt="">
+        <span class="username">@User.Identity.Name.ToUpperInvariant()</span>
+        <i class="clip-chevron-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <li>
+                <a href="@Url.Action("EditProfile", "Users",new { Id= User.Identity.GetUserId()})">
+                    <i class="clip-user-2"></i>
+                    تعديل بياناتي
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("ChangePassword", "Manage")">
+                    <i class="clip-locked"></i>
+                    تغير كلمة المرور
+                </a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <i class="clip-exit"></i>
+                    تسجيل خروج
+                </a>
+            </li>
+        }
+    </ul>
+</li>

@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+<style>
+    h4{
+        font-size:27px;
+    }
+</style>
+<div style="text-align:left; background-color: #f4f4f4; color: #A52A2A; height: 470px; 
+overflow-y:scroll;margin-top:10%;">
+    <div style="padding:20px;">
+        <h4>
+            @Model.Exception.
+        </h4>
+        <h6>@Html.ActionLink("Go Back To Home Page", "Index", "Home")</h6>
+        <br />
+        <br />
+    </div>
+</div>

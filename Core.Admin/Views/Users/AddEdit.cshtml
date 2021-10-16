@@ -1,0 +1,144 @@
+﻿@model Core.Admin.Models.RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "أضافة / تعديل";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <!-- start: PAGE TITLE & BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسية
+                </a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Users")">
+                    ادارة المستخدمين
+                </a>
+            </li>
+        </ol>
+        <!-- end: PAGE TITLE & BREADCRUMB -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+                <li class="active">
+                    <div class="x_titlee">
+                        <h2>
+                            البيانات الأساسية
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="GeneralInfo">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("AddEdit", "Users", FormMethod.Post, new { @Id = "frmAddEdit", @role = "form", onsubmit = "ShowLoading();" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => Model.Id)
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                اسم المستخدم   <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.UserName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.UserName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                الاسم كامل   <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.FullName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.FullName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                رقم الهاتف <span class="symbol required"></span>
+                                            </label>
+                                            @Html.EditorFor(m => Model.PhoneNumber, "Mobile")
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                                        </div>
+                                    </div>
+                                    @if (string.IsNullOrEmpty(Model.Id))
+                                    {
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    كلمة المرور <span class="symbol required"></span>
+                                                </label>
+                                                @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Password)
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="control-label">
+                                                    تأكيد كلمة المرور  <span class="symbol required"></span>
+                                                </label>
+                                                @Html.PasswordFor(m => Model.ConfirmPassword, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <label style="font-size:20px;color:red;" class="control-label">
+                                                اختر الصلاحيات
+                                            </label>
+                                            <br />
+                                            <br />
+                                            @Html.Partial("_ListPages", Model.ListPages)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-yellow btn-block" type="submit">
+                                            حفظ <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.Id))
+                                    {
+                                        <div class="col-md-2">
+                                            <a class="btn btn-yellow btn-block" href="~/Users/AddEdit">
+                                                عنصر جديد <i class="fa fa-arrow-circle-right"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                    <div class="col-md-2">
+                                        <a class="btn btn-yellow btn-block" href="@Url.Action("Index","Users")">
+                                            رجوع <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")

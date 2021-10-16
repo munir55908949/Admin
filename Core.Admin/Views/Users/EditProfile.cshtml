@@ -1,0 +1,87 @@
+﻿@model Core.Admin.Models.RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "تعديل بياناتي";
+}
+<div class="row">
+    <div class="col-sm-12">
+
+        <!-- start: PAGE TITLE & BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسية
+                </a>
+            </li>
+            <li class="active">
+                تعديل بياناتي
+            </li>
+        </ol>
+        <!-- end: PAGE TITLE & BREADCRUMB -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+                <li class="active">
+                    <div class="x_titlee">
+                        <h2>
+                            البيانات الشخصية
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="GeneralInfo">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("EditProfile", "Users", FormMethod.Post, new { @Id = "frmAddEdit", @role = "form", onsubmit = "ShowLoading();" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => Model.Id)
+                                <div class="row">
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                الإسم رباعي <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.FullName, new { onkeypress = "return CheckArabicEngCharactersOnly(event);", @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.FullName)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                أسم المستخدم <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.UserName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.UserName)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-yellow btn-block" type="submit">
+                                            حفظ <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")

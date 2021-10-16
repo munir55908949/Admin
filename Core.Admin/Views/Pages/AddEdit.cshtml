@@ -1,0 +1,119 @@
+﻿@model Core.Admin.Models.PagesModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "أضافة / تعديل";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <!-- start: PAGE TITLE & BREADCRUMB -->
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيسية
+                </a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Pages")">
+                    الصلاحيات
+                </a>
+            </li>
+        </ol>
+        <!-- end: PAGE TITLE & BREADCRUMB -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+                <li class="active">
+                    <div class="x_titlee">
+                        <h2>
+                            البيانات الأساسية
+                        </h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane in active" id="GeneralInfo">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("AddEdit", "Pages", FormMethod.Post, new { @Id = "frmAddEdit", @role = "form", onsubmit = "ShowLoading();" }))
+                            {
+                                @Html.HiddenFor(m => Model.Id)
+                                <div class="row">
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                أسم الصفحة <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.Name, new { @class = "form-control"})
+                                            @Html.ValidationMessageFor(m => m.Name)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                رابط الصفحة <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.Url, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Url)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                العلامة <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.Icon, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Icon)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                الترتيب <span class="symbol required"></span>
+                                            </label>
+                                            @Html.TextBoxFor(m => Model.Order, new { @class = "form-control" , onkeypress = "return isNumber(event)" })
+                                            @Html.ValidationMessageFor(m => m.Order)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-yellow btn-block" type="submit">
+                                            حفظ <i class="fa fa-arrow-circle-right"></i>
+                                        </button>
+                                    </div>
+                                   @if (Model.Id != 0)
+                                   {
+                                    <div class="col-md-2">
+                                        <a class="btn btn-yellow btn-block" href="~/Pages/AddEdit">
+                                            اضافة صلاحية جديد <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                   }
+                                    <div class="col-md-2">
+                                        <a class="btn btn-yellow btn-block" href="@Url.Action("Index","Pages")">
+                                            رجوع <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/jqueryval")
+ 

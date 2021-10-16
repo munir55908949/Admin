@@ -1,0 +1,1973 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LaundryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="SectorId" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="350" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ContractData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContractNumber" Type="nvarchar(max)" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="ContractStatusId" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Note" Type="nvarchar(max)" />
+          <Property Name="BankId" Type="int" />
+          <Property Name="SectorId" Type="int" />
+          <Property Name="AdministrationId" Type="int" />
+        </EntityType>
+        <EntityType Name="ContractStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="DecreaseOrIncrease">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="GuaranteeSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GuaranteeStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Url" Type="nvarchar" MaxLength="250" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="250" />
+          <Property Name="Order" Type="int" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users_Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageId" Type="int" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Warranty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarrantyNumber" Type="nvarchar(max)" />
+          <Property Name="WarrantyValue" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="ContractDataId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="GuaranteeSortId" Type="int" />
+          <Property Name="GuaranteeStatusId" Type="int" />
+          <Property Name="WarrantyTypeId" Type="int" />
+          <Property Name="GuaranteeIssueDate" Type="datetime" />
+          <Property Name="GuaranteeStartDate" Type="datetime" />
+          <Property Name="GuaranteeEndDate" Type="datetime" />
+          <Property Name="NoteWarranty" Type="nvarchar(max)" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="DecreaseOrIncreaseId" Type="int" />
+          <Property Name="DecreaseOrIncreaseValue" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="WarrantyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WarrantyId" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="GuaranteeStatusId" Type="int" />
+          <Property Name="GuaranteeSortId" Type="int" />
+          <Property Name="GuaranteeIssueDate" Type="datetime" />
+          <Property Name="WarrantyNumber" Type="nvarchar(max)" />
+          <Property Name="WarrantyValue" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="WarrantyTypeId" Type="int" />
+          <Property Name="GuaranteeStartDate" Type="datetime" />
+          <Property Name="GuaranteeEndDate" Type="datetime" />
+          <Property Name="NoteWarrantyHistory" Type="nvarchar(max)" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="DecreaseOrIncreaseId" Type="int" />
+          <Property Name="DecreaseOrIncreaseValue" Type="decimal" Precision="18" Scale="3" />
+        </EntityType>
+        <EntityType Name="WarrantyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Administration_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Administration" Type="Self.Administration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administration_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="0..1" />
+          <End Role="Administration" Type="Self.Administration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsers1" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Company" Type="Self.Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Administration">
+          <End Role="Administration" Type="Self.Administration" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="AdministrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_ContractStatus">
+          <End Role="ContractStatus" Type="Self.ContractStatus" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="ContractStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Sector">
+          <End Role="Sector" Type="Self.Sector" Multiplicity="0..1" />
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuaranteeSort_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="GuaranteeSort" Type="Self.GuaranteeSort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuaranteeSort">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuaranteeStatus_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="GuaranteeStatus" Type="Self.GuaranteeStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuaranteeStatus">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Sector" Type="Self.Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pages_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Users_Pages" Type="Self.Users_Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users_Pages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pages_Pages">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="Users_Pages" Type="Self.Users_Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users_Pages">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_ContractData">
+          <End Role="ContractData" Type="Self.ContractData" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="ContractDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_DecreaseOrIncrease">
+          <End Role="DecreaseOrIncrease" Type="Self.DecreaseOrIncrease" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DecreaseOrIncrease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="DecreaseOrIncreaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_GuaranteeSort">
+          <End Role="GuaranteeSort" Type="Self.GuaranteeSort" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="GuaranteeSortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_GuaranteeStatus">
+          <End Role="GuaranteeStatus" Type="Self.GuaranteeStatus" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="GuaranteeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_WarrantyType">
+          <End Role="WarrantyType" Type="Self.WarrantyType" Multiplicity="0..1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarrantyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="WarrantyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_DecreaseOrIncrease">
+          <End Role="DecreaseOrIncrease" Type="Self.DecreaseOrIncrease" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DecreaseOrIncrease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="DecreaseOrIncreaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_GuaranteeSort">
+          <End Role="GuaranteeSort" Type="Self.GuaranteeSort" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="GuaranteeSortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_GuaranteeStatus">
+          <End Role="GuaranteeStatus" Type="Self.GuaranteeStatus" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="GuaranteeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_Warranty">
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warranty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="WarrantyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_WarrantyType">
+          <End Role="WarrantyType" Type="Self.WarrantyType" Multiplicity="0..1" />
+          <End Role="WarrantyHistory" Type="Self.WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarrantyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="WarrantyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Usp_Guaranteesearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="Todate" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="LaundryModelStoreContainer">
+          <EntitySet Name="Administration" EntityType="Self.Administration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractData" EntityType="Self.ContractData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractStatus" EntityType="Self.ContractStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DecreaseOrIncrease" EntityType="Self.DecreaseOrIncrease" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuaranteeSort" EntityType="Self.GuaranteeSort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuaranteeStatus" EntityType="Self.GuaranteeStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sector" EntityType="Self.Sector" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users_Pages" EntityType="Self.Users_Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warranty" EntityType="Self.Warranty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarrantyHistory" EntityType="Self.WarrantyHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarrantyType" EntityType="Self.WarrantyType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Administration_AspNetUsers" Association="Self.FK_Administration_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Administration" EntitySet="Administration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administration_Sector" Association="Self.FK_Administration_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="Administration" EntitySet="Administration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_AspNetUsers" Association="Self.FK_AspNetUsers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_AspNetUsers" Association="Self.FK_Company_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Administration" Association="Self.FK_ContractData_Administration">
+            <End Role="Administration" EntitySet="Administration" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_AspNetUsers" Association="Self.FK_ContractData_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Bank" Association="Self.FK_ContractData_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Company" Association="Self.FK_ContractData_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_ContractStatus" Association="Self.FK_ContractData_ContractStatus">
+            <End Role="ContractStatus" EntitySet="ContractStatus" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Sector" Association="Self.FK_ContractData_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuaranteeSort_AspNetUsers" Association="Self.FK_GuaranteeSort_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuaranteeStatus_AspNetUsers" Association="Self.FK_GuaranteeStatus_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_AspNetUsers" Association="Self.FK_Sector_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pages_AspNetUsers" Association="Self.FK_Users_Pages_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users_Pages" EntitySet="Users_Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pages_Pages" Association="Self.FK_Users_Pages_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Users_Pages" EntitySet="Users_Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_AspNetUsers" Association="Self.FK_Warranty_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_ContractData" Association="Self.FK_Warranty_ContractData">
+            <End Role="ContractData" EntitySet="ContractData" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_Currency" Association="Self.FK_Warranty_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_DecreaseOrIncrease" Association="Self.FK_Warranty_DecreaseOrIncrease">
+            <End Role="DecreaseOrIncrease" EntitySet="DecreaseOrIncrease" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_GuaranteeSort" Association="Self.FK_Warranty_GuaranteeSort">
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_GuaranteeStatus" Association="Self.FK_Warranty_GuaranteeStatus">
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_WarrantyType" Association="Self.FK_Warranty_WarrantyType">
+            <End Role="WarrantyType" EntitySet="WarrantyType" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_AspNetUsers" Association="Self.FK_WarrantyHistory_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_DecreaseOrIncrease" Association="Self.FK_WarrantyHistory_DecreaseOrIncrease">
+            <End Role="DecreaseOrIncrease" EntitySet="DecreaseOrIncrease" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_GuaranteeSort" Association="Self.FK_WarrantyHistory_GuaranteeSort">
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_GuaranteeStatus" Association="Self.FK_WarrantyHistory_GuaranteeStatus">
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_Warranty" Association="Self.FK_WarrantyHistory_Warranty">
+            <End Role="Warranty" EntitySet="Warranty" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_WarrantyType" Association="Self.FK_WarrantyHistory_WarrantyType">
+            <End Role="WarrantyType" EntitySet="WarrantyType" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LaundryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DatabseEntities" annotation:LazyLoadingEnabled="false">
+          <FunctionImport Name="Usp_Guaranteesearch" ReturnType="Collection(LaundryModel.Usp_Guaranteesearch_Result)">
+            <Parameter Name="Fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="Administration" EntityType="LaundryModel.Administration" />
+          <EntitySet Name="AspNetRoles" EntityType="LaundryModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="LaundryModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="LaundryModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="LaundryModel.AspNetUsers" />
+          <EntitySet Name="Bank" EntityType="LaundryModel.Bank" />
+          <EntitySet Name="Company" EntityType="LaundryModel.Company" />
+          <EntitySet Name="ContractData" EntityType="LaundryModel.ContractData" />
+          <EntitySet Name="ContractStatus" EntityType="LaundryModel.ContractStatus" />
+          <EntitySet Name="Currency" EntityType="LaundryModel.Currency" />
+          <EntitySet Name="DecreaseOrIncrease" EntityType="LaundryModel.DecreaseOrIncrease" />
+          <EntitySet Name="GuaranteeSort" EntityType="LaundryModel.GuaranteeSort" />
+          <EntitySet Name="GuaranteeStatus" EntityType="LaundryModel.GuaranteeStatus" />
+          <EntitySet Name="Pages" EntityType="LaundryModel.Pages" />
+          <EntitySet Name="Sector" EntityType="LaundryModel.Sector" />
+          <EntitySet Name="Users_Pages" EntityType="LaundryModel.Users_Pages" />
+          <EntitySet Name="Warranty" EntityType="LaundryModel.Warranty" />
+          <EntitySet Name="WarrantyHistory" EntityType="LaundryModel.WarrantyHistory" />
+          <EntitySet Name="WarrantyType" EntityType="LaundryModel.WarrantyType" />
+          <AssociationSet Name="FK_Administration_AspNetUsers" Association="LaundryModel.FK_Administration_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Administration" EntitySet="Administration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Administration_Sector" Association="LaundryModel.FK_Administration_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="Administration" EntitySet="Administration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Administration" Association="LaundryModel.FK_ContractData_Administration">
+            <End Role="Administration" EntitySet="Administration" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_AspNetUsers" Association="LaundryModel.FK_AspNetUsers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_AspNetUsers" Association="LaundryModel.FK_Company_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_AspNetUsers" Association="LaundryModel.FK_ContractData_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuaranteeSort_AspNetUsers" Association="LaundryModel.FK_GuaranteeSort_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GuaranteeStatus_AspNetUsers" Association="LaundryModel.FK_GuaranteeStatus_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sector_AspNetUsers" Association="LaundryModel.FK_Sector_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Sector" EntitySet="Sector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pages_AspNetUsers" Association="LaundryModel.FK_Users_Pages_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Users_Pages" EntitySet="Users_Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_AspNetUsers" Association="LaundryModel.FK_Warranty_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_AspNetUsers" Association="LaundryModel.FK_WarrantyHistory_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Bank" Association="LaundryModel.FK_ContractData_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Company" Association="LaundryModel.FK_ContractData_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_ContractStatus" Association="LaundryModel.FK_ContractData_ContractStatus">
+            <End Role="ContractStatus" EntitySet="ContractStatus" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractData_Sector" Association="LaundryModel.FK_ContractData_Sector">
+            <End Role="Sector" EntitySet="Sector" />
+            <End Role="ContractData" EntitySet="ContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_ContractData" Association="LaundryModel.FK_Warranty_ContractData">
+            <End Role="ContractData" EntitySet="ContractData" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_Currency" Association="LaundryModel.FK_Warranty_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_DecreaseOrIncrease" Association="LaundryModel.FK_Warranty_DecreaseOrIncrease">
+            <End Role="DecreaseOrIncrease" EntitySet="DecreaseOrIncrease" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_DecreaseOrIncrease" Association="LaundryModel.FK_WarrantyHistory_DecreaseOrIncrease">
+            <End Role="DecreaseOrIncrease" EntitySet="DecreaseOrIncrease" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_GuaranteeSort" Association="LaundryModel.FK_Warranty_GuaranteeSort">
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_GuaranteeSort" Association="LaundryModel.FK_WarrantyHistory_GuaranteeSort">
+            <End Role="GuaranteeSort" EntitySet="GuaranteeSort" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_GuaranteeStatus" Association="LaundryModel.FK_Warranty_GuaranteeStatus">
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_GuaranteeStatus" Association="LaundryModel.FK_WarrantyHistory_GuaranteeStatus">
+            <End Role="GuaranteeStatus" EntitySet="GuaranteeStatus" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Pages_Pages" Association="LaundryModel.FK_Users_Pages_Pages">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Users_Pages" EntitySet="Users_Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warranty_WarrantyType" Association="LaundryModel.FK_Warranty_WarrantyType">
+            <End Role="WarrantyType" EntitySet="WarrantyType" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_Warranty" Association="LaundryModel.FK_WarrantyHistory_Warranty">
+            <End Role="Warranty" EntitySet="Warranty" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarrantyHistory_WarrantyType" Association="LaundryModel.FK_WarrantyHistory_WarrantyType">
+            <End Role="WarrantyType" EntitySet="WarrantyType" />
+            <End Role="WarrantyHistory" EntitySet="WarrantyHistory" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="LaundryModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="Usp_Guaranteesearch_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ContractNumber" Nullable="true" />
+          <Property Type="String" Name="GuaranteeNumber" Nullable="true" />
+          <Property Type="Decimal" Name="GuaranteeValue" Nullable="true" Precision="18" Scale="3" />
+          <Property Type="DateTime" Name="GuaranteeEndDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="GuaranteeStatusId" Nullable="true" />
+          <Property Type="Int32" Name="BankId" Nullable="true" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="String" Name="Note" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="CreatedAt" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="128" />
+          <Property Type="DateTime" Name="ModifiedAt" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="true" />
+          <Property Type="String" Name="Path" Nullable="true" />
+          <Property Type="Int32" Name="SectorId" Nullable="true" />
+          <Property Type="DateTime" Name="GuaranteeIssueDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="AdministrationId" Nullable="true" />
+          <Property Type="Int32" Name="GuaranteeSortId" Nullable="true" />
+          <Property Type="DateTime" Name="GuaranteeStartDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <EntityType Name="Administration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="SectorId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_Administration_AspNetUsers" FromRole="Administration" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Sector" Relationship="LaundryModel.FK_Administration_Sector" FromRole="Administration" ToRole="Sector" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_Administration" FromRole="Administration" ToRole="ContractData" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="FullName" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Administration" Relationship="LaundryModel.FK_Administration_AspNetUsers" FromRole="AspNetUsers" ToRole="Administration" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="LaundryModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="LaundryModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="LaundryModel.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUsers" ToRole="AspNetUsers1" />
+          <NavigationProperty Name="AspNetUsers2" Relationship="LaundryModel.FK_AspNetUsers_AspNetUsers" FromRole="AspNetUsers1" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Company" Relationship="LaundryModel.FK_Company_AspNetUsers" FromRole="AspNetUsers" ToRole="Company" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_AspNetUsers" FromRole="AspNetUsers" ToRole="ContractData" />
+          <NavigationProperty Name="GuaranteeSort" Relationship="LaundryModel.FK_GuaranteeSort_AspNetUsers" FromRole="AspNetUsers" ToRole="GuaranteeSort" />
+          <NavigationProperty Name="GuaranteeStatus" Relationship="LaundryModel.FK_GuaranteeStatus_AspNetUsers" FromRole="AspNetUsers" ToRole="GuaranteeStatus" />
+          <NavigationProperty Name="Sector" Relationship="LaundryModel.FK_Sector_AspNetUsers" FromRole="AspNetUsers" ToRole="Sector" />
+          <NavigationProperty Name="Users_Pages" Relationship="LaundryModel.FK_Users_Pages_AspNetUsers" FromRole="AspNetUsers" ToRole="Users_Pages" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_AspNetUsers" FromRole="AspNetUsers" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_AspNetUsers" FromRole="AspNetUsers" ToRole="WarrantyHistory" />
+          <NavigationProperty Name="AspNetRoles" Relationship="LaundryModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_Bank" FromRole="Bank" ToRole="ContractData" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_Company_AspNetUsers" FromRole="Company" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_Company" FromRole="Company" ToRole="ContractData" />
+        </EntityType>
+        <EntityType Name="ContractData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContractNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="ContractStatusId" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankId" Type="Int32" />
+          <Property Name="SectorId" Type="Int32" />
+          <Property Name="AdministrationId" Type="Int32" />
+          <NavigationProperty Name="Administration" Relationship="LaundryModel.FK_ContractData_Administration" FromRole="ContractData" ToRole="Administration" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_ContractData_AspNetUsers" FromRole="ContractData" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Bank" Relationship="LaundryModel.FK_ContractData_Bank" FromRole="ContractData" ToRole="Bank" />
+          <NavigationProperty Name="Company" Relationship="LaundryModel.FK_ContractData_Company" FromRole="ContractData" ToRole="Company" />
+          <NavigationProperty Name="ContractStatus" Relationship="LaundryModel.FK_ContractData_ContractStatus" FromRole="ContractData" ToRole="ContractStatus" />
+          <NavigationProperty Name="Sector" Relationship="LaundryModel.FK_ContractData_Sector" FromRole="ContractData" ToRole="Sector" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_ContractData" FromRole="ContractData" ToRole="Warranty" />
+        </EntityType>
+        <EntityType Name="ContractStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_ContractStatus" FromRole="ContractStatus" ToRole="ContractData" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_Currency" FromRole="Currency" ToRole="Warranty" />
+        </EntityType>
+        <EntityType Name="DecreaseOrIncrease">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_DecreaseOrIncrease" FromRole="DecreaseOrIncrease" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_DecreaseOrIncrease" FromRole="DecreaseOrIncrease" ToRole="WarrantyHistory" />
+        </EntityType>
+        <EntityType Name="GuaranteeSort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_GuaranteeSort_AspNetUsers" FromRole="GuaranteeSort" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_GuaranteeSort" FromRole="GuaranteeSort" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_GuaranteeSort" FromRole="GuaranteeSort" ToRole="WarrantyHistory" />
+        </EntityType>
+        <EntityType Name="GuaranteeStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_GuaranteeStatus_AspNetUsers" FromRole="GuaranteeStatus" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_GuaranteeStatus" FromRole="GuaranteeStatus" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_GuaranteeStatus" FromRole="GuaranteeStatus" ToRole="WarrantyHistory" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Order" Type="Int32" />
+          <NavigationProperty Name="Users_Pages" Relationship="LaundryModel.FK_Users_Pages_Pages" FromRole="Pages" ToRole="Users_Pages" />
+        </EntityType>
+        <EntityType Name="Sector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Administration" Relationship="LaundryModel.FK_Administration_Sector" FromRole="Sector" ToRole="Administration" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_Sector_AspNetUsers" FromRole="Sector" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_ContractData_Sector" FromRole="Sector" ToRole="ContractData" />
+        </EntityType>
+        <EntityType Name="Users_Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageId" Type="Int32" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_Users_Pages_AspNetUsers" FromRole="Users_Pages" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Pages" Relationship="LaundryModel.FK_Users_Pages_Pages" FromRole="Users_Pages" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="Warranty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarrantyNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WarrantyValue" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ContractDataId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GuaranteeSortId" Type="Int32" />
+          <Property Name="GuaranteeStatusId" Type="Int32" />
+          <Property Name="WarrantyTypeId" Type="Int32" />
+          <Property Name="GuaranteeIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="GuaranteeStartDate" Type="DateTime" Precision="3" />
+          <Property Name="GuaranteeEndDate" Type="DateTime" Precision="3" />
+          <Property Name="NoteWarranty" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="DecreaseOrIncreaseId" Type="Int32" />
+          <Property Name="DecreaseOrIncreaseValue" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_Warranty_AspNetUsers" FromRole="Warranty" ToRole="AspNetUsers" />
+          <NavigationProperty Name="ContractData" Relationship="LaundryModel.FK_Warranty_ContractData" FromRole="Warranty" ToRole="ContractData" />
+          <NavigationProperty Name="Currency" Relationship="LaundryModel.FK_Warranty_Currency" FromRole="Warranty" ToRole="Currency" />
+          <NavigationProperty Name="DecreaseOrIncrease" Relationship="LaundryModel.FK_Warranty_DecreaseOrIncrease" FromRole="Warranty" ToRole="DecreaseOrIncrease" />
+          <NavigationProperty Name="GuaranteeSort" Relationship="LaundryModel.FK_Warranty_GuaranteeSort" FromRole="Warranty" ToRole="GuaranteeSort" />
+          <NavigationProperty Name="GuaranteeStatus" Relationship="LaundryModel.FK_Warranty_GuaranteeStatus" FromRole="Warranty" ToRole="GuaranteeStatus" />
+          <NavigationProperty Name="WarrantyType" Relationship="LaundryModel.FK_Warranty_WarrantyType" FromRole="Warranty" ToRole="WarrantyType" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_Warranty" FromRole="Warranty" ToRole="WarrantyHistory" />
+        </EntityType>
+        <EntityType Name="WarrantyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WarrantyId" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GuaranteeStatusId" Type="Int32" />
+          <Property Name="GuaranteeSortId" Type="Int32" />
+          <Property Name="GuaranteeIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="WarrantyNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WarrantyValue" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="WarrantyTypeId" Type="Int32" />
+          <Property Name="GuaranteeStartDate" Type="DateTime" Precision="3" />
+          <Property Name="GuaranteeEndDate" Type="DateTime" Precision="3" />
+          <Property Name="NoteWarrantyHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="DecreaseOrIncreaseId" Type="Int32" />
+          <Property Name="DecreaseOrIncreaseValue" Type="Decimal" Precision="18" Scale="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LaundryModel.FK_WarrantyHistory_AspNetUsers" FromRole="WarrantyHistory" ToRole="AspNetUsers" />
+          <NavigationProperty Name="DecreaseOrIncrease" Relationship="LaundryModel.FK_WarrantyHistory_DecreaseOrIncrease" FromRole="WarrantyHistory" ToRole="DecreaseOrIncrease" />
+          <NavigationProperty Name="GuaranteeSort" Relationship="LaundryModel.FK_WarrantyHistory_GuaranteeSort" FromRole="WarrantyHistory" ToRole="GuaranteeSort" />
+          <NavigationProperty Name="GuaranteeStatus" Relationship="LaundryModel.FK_WarrantyHistory_GuaranteeStatus" FromRole="WarrantyHistory" ToRole="GuaranteeStatus" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_WarrantyHistory_Warranty" FromRole="WarrantyHistory" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyType" Relationship="LaundryModel.FK_WarrantyHistory_WarrantyType" FromRole="WarrantyHistory" ToRole="WarrantyType" />
+        </EntityType>
+        <EntityType Name="WarrantyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Warranty" Relationship="LaundryModel.FK_Warranty_WarrantyType" FromRole="WarrantyType" ToRole="Warranty" />
+          <NavigationProperty Name="WarrantyHistory" Relationship="LaundryModel.FK_WarrantyHistory_WarrantyType" FromRole="WarrantyType" ToRole="WarrantyHistory" />
+        </EntityType>
+        <Association Name="FK_Administration_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.Administration" Role="Administration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Administration_Sector">
+          <End Type="LaundryModel.Sector" Role="Sector" Multiplicity="0..1" />
+          <End Type="LaundryModel.Administration" Role="Administration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Administration">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Administration">
+          <End Type="LaundryModel.Administration" Role="Administration" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="AdministrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LaundryModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LaundryModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.Company" Role="Company" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuaranteeSort_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.GuaranteeSort" Role="GuaranteeSort" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuaranteeSort">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GuaranteeStatus_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.GuaranteeStatus" Role="GuaranteeStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GuaranteeStatus">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sector_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.Sector" Role="Sector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sector">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pages_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.Users_Pages" Role="Users_Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users_Pages">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_AspNetUsers">
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Bank">
+          <End Type="LaundryModel.Bank" Role="Bank" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="BankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Company">
+          <End Type="LaundryModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_ContractStatus">
+          <End Type="LaundryModel.ContractStatus" Role="ContractStatus" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="ContractStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractData_Sector">
+          <End Type="LaundryModel.Sector" Role="Sector" Multiplicity="0..1" />
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractData">
+              <PropertyRef Name="SectorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_ContractData">
+          <End Type="LaundryModel.ContractData" Role="ContractData" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractData">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="ContractDataId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_Currency">
+          <End Type="LaundryModel.Currency" Role="Currency" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_DecreaseOrIncrease">
+          <End Type="LaundryModel.DecreaseOrIncrease" Role="DecreaseOrIncrease" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DecreaseOrIncrease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="DecreaseOrIncreaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_DecreaseOrIncrease">
+          <End Type="LaundryModel.DecreaseOrIncrease" Role="DecreaseOrIncrease" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DecreaseOrIncrease">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="DecreaseOrIncreaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_GuaranteeSort">
+          <End Type="LaundryModel.GuaranteeSort" Role="GuaranteeSort" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="GuaranteeSortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_GuaranteeSort">
+          <End Type="LaundryModel.GuaranteeSort" Role="GuaranteeSort" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeSort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="GuaranteeSortId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_GuaranteeStatus">
+          <End Type="LaundryModel.GuaranteeStatus" Role="GuaranteeStatus" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="GuaranteeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_GuaranteeStatus">
+          <End Type="LaundryModel.GuaranteeStatus" Role="GuaranteeStatus" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GuaranteeStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="GuaranteeStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Pages_Pages">
+          <End Type="LaundryModel.Pages" Role="Pages" Multiplicity="0..1" />
+          <End Type="LaundryModel.Users_Pages" Role="Users_Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users_Pages">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warranty_WarrantyType">
+          <End Type="LaundryModel.WarrantyType" Role="WarrantyType" Multiplicity="0..1" />
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarrantyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="WarrantyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_Warranty">
+          <End Type="LaundryModel.Warranty" Role="Warranty" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warranty">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="WarrantyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarrantyHistory_WarrantyType">
+          <End Type="LaundryModel.WarrantyType" Role="WarrantyType" Multiplicity="0..1" />
+          <End Type="LaundryModel.WarrantyHistory" Role="WarrantyHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WarrantyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WarrantyHistory">
+              <PropertyRef Name="WarrantyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="LaundryModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="LaundryModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LaundryModelStoreContainer" CdmEntityContainer="DatabseEntities">
+          <FunctionImportMapping FunctionImportName="Usp_Guaranteesearch" FunctionName="LaundryModel.Store.Usp_Guaranteesearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LaundryModel.Usp_Guaranteesearch_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="GuaranteeNumber" ColumnName="GuaranteeNumber" />
+                <ScalarProperty Name="GuaranteeValue" ColumnName="GuaranteeValue" />
+                <ScalarProperty Name="GuaranteeEndDate" ColumnName="GuaranteeEndDate" />
+                <ScalarProperty Name="GuaranteeStatusId" ColumnName="GuaranteeStatusId" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="SectorId" ColumnName="SectorId" />
+                <ScalarProperty Name="GuaranteeIssueDate" ColumnName="GuaranteeIssueDate" />
+                <ScalarProperty Name="AdministrationId" ColumnName="AdministrationId" />
+                <ScalarProperty Name="GuaranteeSortId" ColumnName="GuaranteeSortId" />
+                <ScalarProperty Name="GuaranteeStartDate" ColumnName="GuaranteeStartDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Administration">
+            <EntityTypeMapping TypeName="LaundryModel.Administration">
+              <MappingFragment StoreEntitySet="Administration">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="SectorId" ColumnName="SectorId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="LaundryModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="LaundryModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="LaundryModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="LaundryModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bank">
+            <EntityTypeMapping TypeName="LaundryModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="LaundryModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractData">
+            <EntityTypeMapping TypeName="LaundryModel.ContractData">
+              <MappingFragment StoreEntitySet="ContractData">
+                <ScalarProperty Name="AdministrationId" ColumnName="AdministrationId" />
+                <ScalarProperty Name="SectorId" ColumnName="SectorId" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ContractStatusId" ColumnName="ContractStatusId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="ContractNumber" ColumnName="ContractNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractStatus">
+            <EntityTypeMapping TypeName="LaundryModel.ContractStatus">
+              <MappingFragment StoreEntitySet="ContractStatus">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="LaundryModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DecreaseOrIncrease">
+            <EntityTypeMapping TypeName="LaundryModel.DecreaseOrIncrease">
+              <MappingFragment StoreEntitySet="DecreaseOrIncrease">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuaranteeSort">
+            <EntityTypeMapping TypeName="LaundryModel.GuaranteeSort">
+              <MappingFragment StoreEntitySet="GuaranteeSort">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuaranteeStatus">
+            <EntityTypeMapping TypeName="LaundryModel.GuaranteeStatus">
+              <MappingFragment StoreEntitySet="GuaranteeStatus">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="LaundryModel.Pages">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sector">
+            <EntityTypeMapping TypeName="LaundryModel.Sector">
+              <MappingFragment StoreEntitySet="Sector">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users_Pages">
+            <EntityTypeMapping TypeName="LaundryModel.Users_Pages">
+              <MappingFragment StoreEntitySet="Users_Pages">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warranty">
+            <EntityTypeMapping TypeName="LaundryModel.Warranty">
+              <MappingFragment StoreEntitySet="Warranty">
+                <ScalarProperty Name="DecreaseOrIncreaseValue" ColumnName="DecreaseOrIncreaseValue" />
+                <ScalarProperty Name="DecreaseOrIncreaseId" ColumnName="DecreaseOrIncreaseId" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="NoteWarranty" ColumnName="NoteWarranty" />
+                <ScalarProperty Name="GuaranteeEndDate" ColumnName="GuaranteeEndDate" />
+                <ScalarProperty Name="GuaranteeStartDate" ColumnName="GuaranteeStartDate" />
+                <ScalarProperty Name="GuaranteeIssueDate" ColumnName="GuaranteeIssueDate" />
+                <ScalarProperty Name="WarrantyTypeId" ColumnName="WarrantyTypeId" />
+                <ScalarProperty Name="GuaranteeStatusId" ColumnName="GuaranteeStatusId" />
+                <ScalarProperty Name="GuaranteeSortId" ColumnName="GuaranteeSortId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ContractDataId" ColumnName="ContractDataId" />
+                <ScalarProperty Name="WarrantyValue" ColumnName="WarrantyValue" />
+                <ScalarProperty Name="WarrantyNumber" ColumnName="WarrantyNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarrantyHistory">
+            <EntityTypeMapping TypeName="LaundryModel.WarrantyHistory">
+              <MappingFragment StoreEntitySet="WarrantyHistory">
+                <ScalarProperty Name="DecreaseOrIncreaseValue" ColumnName="DecreaseOrIncreaseValue" />
+                <ScalarProperty Name="DecreaseOrIncreaseId" ColumnName="DecreaseOrIncreaseId" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="NoteWarrantyHistory" ColumnName="NoteWarrantyHistory" />
+                <ScalarProperty Name="GuaranteeEndDate" ColumnName="GuaranteeEndDate" />
+                <ScalarProperty Name="GuaranteeStartDate" ColumnName="GuaranteeStartDate" />
+                <ScalarProperty Name="WarrantyTypeId" ColumnName="WarrantyTypeId" />
+                <ScalarProperty Name="WarrantyValue" ColumnName="WarrantyValue" />
+                <ScalarProperty Name="WarrantyNumber" ColumnName="WarrantyNumber" />
+                <ScalarProperty Name="GuaranteeIssueDate" ColumnName="GuaranteeIssueDate" />
+                <ScalarProperty Name="GuaranteeSortId" ColumnName="GuaranteeSortId" />
+                <ScalarProperty Name="GuaranteeStatusId" ColumnName="GuaranteeStatusId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="WarrantyId" ColumnName="WarrantyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarrantyType">
+            <EntityTypeMapping TypeName="LaundryModel.WarrantyType">
+              <MappingFragment StoreEntitySet="WarrantyType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="LaundryModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

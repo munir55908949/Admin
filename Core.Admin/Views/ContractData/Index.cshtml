@@ -1,0 +1,537 @@
+﻿@model Core.Admin.Models.ContractDataModel
+@using Kendo.Mvc.UI;
+@{
+    ViewBag.Title = "العقـــــود";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<script type="text/javascript" src="@Href("~/ViewsScripts/ContractData/ContractDataGrid.js")"></script>*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li>
+                <i class="clip-home-3"></i>
+                <a href="@Url.Action("Index", "Home")">
+                    الرئيســية
+                </a>
+            </li>
+            <li class="active">
+                العقـــــود
+            </li>
+        </ol>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-external-link-square"></i>
+                    بحــث في العقـــــود
+                    <div class="panel-tools">
+                        <a class="btn btn-xs btn-link panel-collapse collapses" href="#">
+                        </a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Search", "ContractData", FormMethod.Post, new { Id = "frmSearch", enctype = "multipart/form-data" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="control-label">
+                                            رقــم العقـــــد
+                                        </label>
+                                        @Html.TextBoxFor(m => Model.ContractNumber, new { @class = "form-control", @placeholder = "البحث برقــم العقـــــد" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                حــالة العقـــــد
+                                            </label>
+                                            @*@Html.DropDownListFor(m => Model.BankId, Model.BankList, new { @class = "form-control" })*@
+                                            @(Html.Kendo().DropDownListFor(m => m.ContractStatusId)
+                                             .Name("ContractStatusName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.ContractStatusList)
+                                            ))
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                الشــــركة
+                                            </label>
+                                            @*@Html.DropDownListFor(m => Model.CompanyId, Model.CompanyList, new { @class = "form-control" })*@
+                                            @(Html.Kendo().DropDownListFor(m => m.CompanyId)
+                                             .Name("CompanyName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.CompanyList)
+                                            ))
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">
+                                                البنك
+                                            </label>
+                                            @*@Html.DropDownListFor(m => Model.CompanyId, Model.CompanyList, new { @class = "form-control" })*@
+                                            @(Html.Kendo().DropDownListFor(m => m.BankId)
+                                             .Name("BankName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.BankList)
+                                            ))
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        القطاع
+                                                    </label>
+                                                    @*@Html.DropDownListFor(m => Model.CompanyId, Model.CompanyList, new { @class = "form-control" })*@
+                                                    @(Html.Kendo().DropDownListFor(m => m.SectorId)
+                                             .Name("SectorName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.SectorList)
+                                            ))
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        الإدارة
+                                                    </label>
+                                                    @*@Html.DropDownListFor(m => Model.CompanyId, Model.CompanyList, new { @class = "form-control" })*@
+                                                    @(Html.Kendo().DropDownListFor(m => m.AdministrationId)
+                                             .Name("AdministrationName")
+                                            .Filter("contains")
+                                            .HtmlAttributes(new { @style="width:100%"})
+                                            .BindTo((Model.AdministrationList)
+                                            ))
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        ملاحظـــــات
+                                                    </label>
+                                                    @Html.TextBoxFor(m => Model.Note, new { @class = "form-control", @placeholder = "البحــث بالملاحظــات" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label class="control-label">
+                                                        منفــذ المعامــلة
+                                                    </label>
+                                                    @Html.TextBoxFor(m => Model.CreatedBy, new { @class = "form-control", @placeholder = "البحــث باسم منفــذ المعامــلة" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2 button-style">
+                                            <button id="btnSearch" class="btn btn-blue" type="button" style="font-size: medium">
+                                                بحــــث  <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-2 button-style">
+                                            <button id="btnReport" onclick="ExportReport()" class="btn btn-yellow" type="button" style="font-size: medium">
+                                                طبــــــاعة تقـريـر <i class="fa fa-print"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="k-rtl">
+@(Html.Kendo().Grid<Core.ViewModels.ContractDataViewModel>
+()
+.Name("Grid")
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id).Hidden();
+    columns.Bound(p => p.Id).Title("مسلسل").Filterable(false).Width("3%");
+
+    columns.Bound(p => p.ContractNumber).Title("رقم العقد").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=ContractNumber??'-'#").Width("9%");
+    columns.Bound(p => p.ContractStatusName).Title("حالة العقد").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=ContractStatusName??'-'#").Width("5%");
+    columns.Bound(p => p.CompanyName).Title("الشركة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CompanyName??'-' #").Width("14%");
+    columns.Bound(p => p.BankName).Title("البنك").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=BankName??'-' #").Width("7%");
+    columns.Bound(p => p.SectorName).Title("القطاع").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=SectorName??'-' #").Width("12%");
+    columns.Bound(p => p.AdministrationName).Title("الإدارة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=AdministrationName??'-' #").Width("12%");
+    columns.Bound(p => p.Note).Title("ملاحظات").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=Note??'-'#").Width("10%");
+    columns.Bound(p => p.CreatedByName).Title("منفذ المعاملة").Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).ShowOperators(false))).ClientTemplate("#=CreatedByName??'-'#").Width("5%");
+    columns.Bound(p => p.Path).Title("مرفقات").Filterable(false).ClientTemplate("# if(data.Path == null){'-'}else{# <a   href=\"/FilesUpload/#:data.Path#\" title='نحميل' target=\"_blanc\"><i class=\"fa fa-eye\" style=\"color:blue\"></i></a>#}#").Width("3%");
+    columns.Bound("").Title(" تعديـل | إضافة كفالة | حـذف").ClientTemplate(
+
+                                                                                                                                 "# {# <a  onclick='showPopup(\"#=Id#\")'  class=\"label label-default  k-button\" href=\"javascript:void(0);\" title='تعديل'>تعديل<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                 + "# {# <a  class=\"label label-default  k-button\" href=\"Warranty/AddEditDetails/#:data.Id#\" title='إضافــة كفالة'>إضافــة كفالة<i class=\"fa fa-edit\"style=\"color:Darkblue !important\"></i></a>#}#"
+                                                                                                                                + "# {# <a  class=\"not-click\"  href=\"javascript:DeleteItem('#:data.Id#','هل أنت متأكد من الحذف', 'ContractData')\" title='حذف'><i class=\"fa fa-trash-o\" style=\"color:red\"></i></a>#}#"
+
+
+
+                                                                                                                                    ).Sortable(false).Width("8%");
+})
+.ToolBar(toolBar =>
+{
+    toolBar.Template("<a class = \"k-button k-button-icontext\" style = \"color:white;font-size:30px;/* background-color:#020024; */background: rgb(2,0,36);background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%);border-radius: 10px;-webkit-border-radius: 15px;-moz-border-radius: 10px;box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);\" onclick='showPopup(0)' href=\"javascript:void(0);\">إضافــة بيانات عقـــــد جديــد <i class='clip-pencil'></i></a>") ;
+})
+
+
+
+
+.Pageable(pageable => pageable
+.Refresh(true)
+.PageSizes(new int[] { 10, 20, 50, 100, 200, 500 })
+.ButtonCount(5).Messages(m =>
+{
+    m.Display("طلب");
+    m.Empty("لا يوجد طلبات");
+    m.ItemsPerPage("طلب بالصفحة");
+}))
+.Sortable()
+.Filterable(ftb => ftb.Enabled(false))
+.HtmlAttributes(new { style = "tr{cursor: pointer;" })
+.DataSource(dataSource => dataSource
+.Ajax()
+.Batch(true)
+.ServerOperation(true)
+.Sort(sort => sort.Add("Id").Descending())
+.Events(events => events.Error("error_handler"))
+.Model(model =>
+{
+    model.Id(p => p.Id);
+})
+.PageSize(20)
+.Read(read => read.Action("Read", "ContractData"))
+)
+
+ )
+
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Error:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        }
+    </script>
+</div>
+
+<script>
+    InializeDateH();
+
+    function InializeDateH() {
+        var calendar = $.calendars.instance('ummalqura', 'ar');
+        $('.datepickerPopup').calendarsPicker({ calendar: calendar, todayText: "اليوم", prevText: "السابق >>", nextText: "<< التالي", closeText: "اغلاق", clearText: "مسح" });
+    }
+  
+</script>
+<script>
+    function showPopup(id) {
+            var url = '@Url.Action("AddEdit", "ContractData")';
+            $.get(url, { id: id }, setData);
+            InializeDateH();
+    }
+    @*function showPopupDetails(id) {
+            var url = '@Url.Action("AddEditDetails", "ContractData")';
+            $.get(url, { id: id }, setData);
+            InializeDateH();
+    }*@
+
+            function setData(data) {
+            $('#myModal').modal({ keyboard: true}, 'show');
+            $(".close").click($('#myModal').hide())
+            // putting the data to the pop up div
+            $("#itemdetailDiv").html(data);
+            // viewing the div as block
+            $("#itemdetailDiv").css("display", "block");
+    }
+
+            function CloseWindow() {
+            $("#PopupDiv").css("display", "none");
+            }
+</script>
+
+<!--PopUp-->
+<div id='myModal' class='modal fade in'>
+    <div class="modal-dialog">
+        <div class="modal-content" >
+            <div id='myModalContent'>
+
+                <button type="button" onclick="CloseWindow()" class="close" data-dismiss="modal">x</button>
+                <div class="modal-body" id="itemdetailDiv">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+<style>
+    .tabbable {
+        width: 1310px !important;
+        height: 1100px;
+        padding: 10px;
+        margin: 10px auto;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(183,240,251,1) 100%);
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+        -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+        -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+    }
+
+        .tabbable .inner-wrap {
+            padding: 5px;
+            margin: 10px 10px 10px 10px;
+            background: #F8F8F8;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .tabbable h2 {
+            background: #2A88AD;
+            padding: 10px 10px 10px 10px;
+            margin: 10px 10px 10px 10px;
+            border-radius: 10px 10px 0 0;
+            -webkit-border-radius: 10px 10px 0 0;
+            -moz-border-radius: 10px 10px 0 0;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+            font: normal 30px 'Bitter', serif;
+            -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+            border: 1px solid #257C9E;
+        }
+
+    .control-label {
+        font: normal 30px 'Bitter', serif !important;
+    }
+    .tab-content {
+        border: 1px solid #DDDDDD !important;
+        padding: 61px 18px !important;
+        position: relative !important;
+    }
+
+    .k-textbox {
+        font: normal 20px 'Bitter', serif !important;
+        background: rgb(2,0,36);
+        background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,121,120,1) 0%, rgba(237,249,250,1) 0%) !important;
+    }
+
+    .k-input {
+        font: normal 20px 'Bitter', serif !important;
+    }
+
+    .main-navigation navbar-collapse collapse {
+        width: auto !important;
+
+    }
+    .k-button k-button-icontext {
+        /*padding: 10px !important;
+        margin: 10px auto !important;*/
+        /*background: rgb(2,0,36) !important;*/
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%) !important;
+        border-radius: 10px !important;
+        -webkit-border-radius: 20px !important;
+        -moz-border-radius: 10px !important;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13) !important;
+        -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13) !important;
+        -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13) !important;
+    }
+    .modal-body {
+        background: linear-gradient(90deg, rgba(2,0,36,1) 100%, rgba(9,103,121,1) 1%, rgba(2,0,36,1) 100%) !important;
+        border-radius: 10px !important;
+        -webkit-border-radius: 20px !important;
+        -moz-border-radius: 10px !important;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.13) !important;
+        -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.13) !important;
+        -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13) !important;
+    }
+</style>
+<script>
+
+                    $(function () {
+
+                            $('#DesignVacation_DepartureDate').datepicker({
+                                dateFormat: 'dd/mm/yy'
+                            });
+
+                    });
+                 $("#btnSearch").click(function () {
+                     var ContractNumber = $("#ContractNumber").val();
+                     var ContractStatusId = $("#ContractStatusName").val();
+                     var CompanyId = $("#CompanyName").val();
+                     var BankId = $("#BankName").val();
+                     var SectorId = $("#SectorName").val();
+                     var AdministrationId = $("#AdministrationName").val();
+                     var Note = $("#Note").val();
+                     var CreatedBy = $("#CreatedBy").val();
+
+
+        var filters = [];
+
+                     if (ContractNumber.length > 0)
+                         filters.push({ field: "ContractNumber", operator: "contains", value: ContractNumber });
+                     if (ContractStatusId > 0)
+                         filters.push({ field: "ContractStatusId", operator: "eq", value: ContractStatusId });
+                     if (CompanyId > 0)
+                         filters.push({ field: "CompanyId", operator: "eq", value: CompanyId });
+                     if (BankId > 0)
+                         filters.push({ field: "BankId", operator: "eq", value: BankId });
+                     if (SectorId > 0)
+                         filters.push({ field: "SectorId", operator: "eq", value: SectorId });
+                     if (AdministrationId > 0)
+                         filters.push({ field: "AdministrationId", operator: "eq", value: AdministrationId });
+                     if (Note.length > 0)
+                         filters.push({ field: "Note", operator: "contains", value: Note });
+                     if (CreatedBy.length > 0)
+                         filters.push({ field: "CreatedByName", operator: "contains", value: CreatedBy });
+        var grid = $("#Grid").data("kendoGrid");
+        var dataSource = grid.dataSource;
+        dataSource.filter({
+            logic: "and",
+            filters: filters
+        });
+        grid.dataSource.read();
+    });
+    function ExportReport() {
+        $("#loadingPanel").show();
+        var ContractNumber = $("#ContractNumber").val();
+        var ContractStatusId = $("#ContractStatusName").val();
+        var CompanyId = $("#CompanyName").val();
+        var BankId = $("#BankName").val();
+        var SectorId = $("#SectorName").val();
+        var AdministrationId = $("#AdministrationName").val();
+        var Note = $("#Note").val();
+        var CreatedBy = $("#CreatedBy").val();
+         $.ajax({
+            url: '@Url.Action("ExportReport")',
+            type: 'Post',
+            cache: false,
+             data: { ContractNumber, ContractStatusId, CompanyId, BankId, SectorId, AdministrationId, Note, CreatedBy},
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }
+    @*function ContractDataExtendReport() {
+        $("#loadingPanel").show();
+        var PoNo = $("#PoNo").val();
+        var PracticeNo = $("#PracticeNo").val();
+        var ContractDataNo = $("#ContractDataNo").val();
+        var ContractDataValue = $("#ContractDataValue").val();
+        var ContractDataEndDate = $("#ContractDataEndDate").val();
+        var ContractDataStatusId = $("#ContractDataStatusName").val();
+        var BankId = $("#BankName").val();
+        var CompanyId = $("#CompanyName").val();
+        var CompanyAddress = $("#CompanyAddress").val();
+        var Notes = $("#Notes").val();
+        var CreatedBy = $("#CreatedBy").val();
+         $.ajax({
+            url: '@Url.Action("ContractDataExtendReport")',
+            type: 'Post',
+            cache: false,
+             data: { PoNo, PracticeNo, ContractDataNo, ContractDataValue, ContractDataEndDate, ContractDataStatusId, BankId, CompanyId, CompanyAddress, Notes, CreatedBy},
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }
+    function ContractDataBackReport() {
+        $("#loadingPanel").show();
+        var PoNo = $("#PoNo").val();
+        var PracticeNo = $("#PracticeNo").val();
+        var ContractDataNo = $("#ContractDataNo").val();
+        var ContractDataValue = $("#ContractDataValue").val();
+        var ContractDataEndDate = $("#ContractDataEndDate").val();
+        var ContractDataStatusId = $("#ContractDataStatusName").val();
+        var BankId = $("#BankName").val();
+        var CompanyId = $("#CompanyName").val();
+        var CompanyAddress = $("#CompanyAddress").val();
+        var Notes = $("#Notes").val();
+        var BudgetNo = $("#BudgetNo").val();
+        var CreatedBy = $("#CreatedBy").val();
+         $.ajax({
+            url: '@Url.Action("ContractDataBackReport")',
+            type: 'Post',
+            cache: false,
+             data: { PoNo, PracticeNo, ContractDataNo, ContractDataValue, ContractDataEndDate, ContractDataStatusId, BankId, CompanyId, CompanyAddress, Notes, BudgetNo, CreatedBy},
+            cache: false,
+            success: function (data) {
+                $("#loadingPanel").hide();
+                if (data.error != null) {
+                    swal("", data.error, "error");
+                }
+                else {
+                   var a = document.createElement('a');
+                    a.href = "/FilesUpload/" + data;
+                    // Give filename you wish to download
+                    a.download = "التقرير.pdf";
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            }
+        });
+    }*@
+</script>
+@Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,59 @@
+﻿@using Kendo.Mvc.UI;
+@*@model Core.ViewModels.ChartViewModel*@
+@{
+    ViewBag.Title = "الرئيســــية";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .container {
+        background-image: url('../../Content/img/logo-mew.gif') !important;
+        border-radius:50px!important;
+        
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
+
+@*<script type="text/javascript" src="@Href("~/ViewsScripts/Dashboard/Index.js")"></script>*@
+<!-- /.row -->
+<br />
+<div class="row bdy">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                الرئيســــية
+            </div>
+            <div class="panel-body" >
+                <div class="col-md-12">
+                    <div class="row" id="_Index">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @*@Html.Partial("_HomePage", Model.ListOrderNumber, new ViewDataDictionary { { "Name", "OrderNumber" }, { "Title", "عدد الطلبات" }, { "Type", "BarChart" }, { "Hint", " طلب" }
+                                   , { "Max", (Model.ListOrderNumber.Max(x=>x.Count) + ((Model.ListOrderNumber.Max(x => x.Count) * 10) / 100)) }, 
+                                   { "step", (Model.ListOrderNumber.Max(x => x.Count)*20) /100 } })
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.Partial("_HomePage", Model.ListOrderPrice, new ViewDataDictionary { { "Name", "OrderPrice1" }, { "Title", "قيم الطلبات" }, { "Type", "BarChart" }, { "Hint", " جنية" }, { "Max", (Model.ListOrderPrice.Max(x => x.Count) + ((Model.ListOrderPrice.Max(x => x.Count) * 20) / 100)) }, { "Step", (Model.ListOrderPrice.Max(x => x.Count) * 10) / 100 } })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- /.panel-body -->
+        </div>
+
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<style>
+    svg:not(:root) {
+        direction: ltr;
+    }
+</style>
+ 
